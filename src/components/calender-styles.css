@@ -1,0 +1,12 @@
+.calender {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(7, 50px);
+  grid-template-rows: repeat(5, 50px);
+}
+
+.calender-day {
+  background-color: coral;
+  height: 50px;
+  width: 50px;
+}
