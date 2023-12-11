@@ -39,3 +39,11 @@ $week = [
   <?php endfor; ?>
 
 </div>
+
+<form action="php/booking.php" method="post" class="flex flex-col max-w-md my-2">
+  <label for="date-from">from:</label>
+  <input name="date-from" type="date" min="2024-01-01" max="2024-01-31">
+  <label for="date-to">to:</label>
+  <input name="date-to" type="date" min="2024-01-01" max="2024-01-31">
+  <button type="submit">OK</button>
+</form>

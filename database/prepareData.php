@@ -7,7 +7,7 @@ $db = new PDO('sqlite:hotel.db');
 
 /*
 
-This file has been used to setup and populate the database with relevant data.
+This file has been used to setup and reset the database during development.
 
 This file won't be included when the site is deployed.
 
