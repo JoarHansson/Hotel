@@ -14,7 +14,9 @@ $week = [
 
 ?>
 
-<div class="calender">
+<p id="instruction-text" class="mb-4">Choose a start date</p>
+
+<div class="calender mb-4">
 
   <?php
 
@@ -25,7 +27,7 @@ $week = [
 
   for ($i = 1; $i < 32; $i++) : ?>
 
-    <div class="calender-day
+    <button value="<?= $i ?>" class="calender-day bg-slate-600
     <?php if (isset($week[$counter])) {
       echo $week[$counter];
     } else {
@@ -33,17 +35,20 @@ $week = [
       echo "Monday";
     } ?>" id="calender-day-<?= $i ?>">
       <?= $i ?>
-    </div>
+    </button>
 
     <?php $counter++; ?>
   <?php endfor; ?>
 
+  <button id="button-submit-form" class="bg-emerald-600 col-span-2">OK</button>
+  <button id="button-clear-selection" class="bg-rose-600 col-span-2">CLEAR</button>
+
 </div>
 
-<form action="php/booking.php" method="post" class="flex flex-col max-w-md my-2">
-  <label for="date-from">from:</label>
-  <input name="date-from" type="date" min="2024-01-01" max="2024-01-31">
-  <label for="date-to">to:</label>
-  <input name="date-to" type="date" min="2024-01-01" max="2024-01-31">
-  <button type="submit">OK</button>
+<!-- The hidden form is submitted in calender.js -->
+<form action="php/booking.php" method="post" id="form-make-booking" class="hidden">
+  <input name="date-from" id="date-from" type="date" min="2024-01-01" max="2024-01-31">
+  <input name="date-to" id="date-to" type="date" min="2024-01-01" max="2024-01-31">
 </form>
+
+<script src="/js/calender.js"></script>

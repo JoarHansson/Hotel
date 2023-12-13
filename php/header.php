@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-screen">
 
 <head>
   <meta charset="UTF-8">
@@ -8,4 +8,4 @@
   <link rel="stylesheet" href="../public/style.css">
 </head>
 
-<body class="m-2">
+<body class="p-4 h-full bg-slate-800">
