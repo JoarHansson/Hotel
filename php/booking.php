@@ -17,6 +17,8 @@ if (isset($_POST["date-from"], $_POST["date-to"])) {
   $dateFrom = intval($dateFrom);
   $dateTo = intval($dateTo);
 
+  $_SESSION["reservedDateFrom"] = $dateFrom;
+  $_SESSION["reservedDateTo"] = $dateTo;
 
   // initialize db and get the chosen room and dates
   $db = new PDO("sqlite:../database/hotel.db");
@@ -44,30 +46,19 @@ if (isset($_POST["date-from"], $_POST["date-to"])) {
     $_SESSION["message"] = "one or more dates are already booked.";
   } else {
 
-    // if the room is available, make the booking (update occupancy table):
-    $statementMakeBooking = $db->prepare(
+    // if the room is available, make the reservation (update occupancy table):
+    $statementMakeReservation = $db->prepare(
       "UPDATE occupancy
       SET occupied = 1
       WHERE date BETWEEN :dateFrom AND :dateTo
       AND room_id = 3" /* hard coded for now */
     );
 
-    $statementMakeBooking->bindParam(":dateFrom", $dateFrom, PDO::PARAM_INT);
-    $statementMakeBooking->bindParam(":dateTo", $dateTo, PDO::PARAM_INT);
-    $statementMakeBooking->execute();
+    $statementMakeReservation->bindParam(":dateFrom", $dateFrom, PDO::PARAM_INT);
+    $statementMakeReservation->bindParam(":dateTo", $dateTo, PDO::PARAM_INT);
+    $statementMakeReservation->execute();
 
-    // save the booking info (insert into bookings table):
-    $statementSaveBookingInfo = $db->prepare(
-      "INSERT INTO bookings (guest_name, checkin_date, checkout_date, room_id)
-      VALUES ('Joar', :dateFrom, :dateTo, 3)"  /* name and room hard coded for now */
-    );
-
-    $statementSaveBookingInfo->bindParam(":dateFrom", $dateFrom, PDO::PARAM_INT);
-    $statementSaveBookingInfo->bindParam(":dateTo", $dateTo, PDO::PARAM_INT);
-    $statementSaveBookingInfo->execute();
-
-
-    $_SESSION["message"] = "booking succeeded";
+    $_SESSION["message"] = "reservation succeeded, now you shall pay";
   }
 }
 
