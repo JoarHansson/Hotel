@@ -27,7 +27,7 @@ calender.addEventListener("click", (event) => {
 
     //  visually distinguish chosen start date:
     event.target.classList.remove("bg-slate-600");
-    event.target.classList.add("font-bold", "bg-slate-700");
+    event.target.classList.add("font-bold", "bg-slate-300", "text-black");
 
     instructionText.textContent = "Choose an end date";
 
@@ -61,7 +61,7 @@ calender.addEventListener("click", (event) => {
 
     dateButtonsSelected.forEach((node) => {
       node.classList.remove("bg-slate-600");
-      node.classList.add("font-bold", "bg-slate-700");
+      node.classList.add("font-bold", "bg-slate-300", "text-black");
     });
 
     instructionText.textContent = "Confirm booking or clear selection";

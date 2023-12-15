@@ -12,6 +12,19 @@ $week = [
   "Sunday"
 ];
 
+
+$db = new PDO("sqlite:" . __DIR__ . "/../database/hotel.db");
+
+// get occupancy from db to be able to show availability in the calender UI
+$statementCheckOccupancy = $db->prepare(
+  "SELECT * FROM occupancy
+  WHERE occupied = true AND room_id = 3" /* room_id hard coded for now */
+);
+$statementCheckOccupancy->execute();
+$occupancy = $statementCheckOccupancy->fetchAll(PDO::FETCH_ASSOC);
+
+$occupiedDates = array_column($occupancy, "date");
+
 ?>
 
 <p id="instruction-text" class="mb-4">Choose a start date</p>
@@ -27,13 +40,23 @@ $week = [
 
   for ($i = 1; $i < 32; $i++) : ?>
 
-    <button value="<?= $i ?>" class="calender-day bg-slate-600
-    <?php if (isset($week[$counter])) {
+    <button value="<?= $i ?>" class="calender-day
+    <?php
+
+    if (in_array($i, $occupiedDates)) {
+      echo "bg-slate-900 cursor-not-allowed ";
+    } else {
+      echo "bg-slate-600 ";
+    }
+
+    if (isset($week[$counter])) {
       echo $week[$counter];
     } else {
       $counter = 0;
       echo "Monday";
-    } ?>" id="calender-day-<?= $i ?>">
+    }
+
+    ?>" id="calender-day-<?= $i ?>">
       <?= $i ?>
     </button>
 
