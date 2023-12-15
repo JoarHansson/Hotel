@@ -67,7 +67,7 @@ if (isset($_POST["date-from"], $_POST["date-to"])) {
     $statementSaveBookingInfo->execute();
 
 
-    $_SESSION["message"] = "booking succeded";
+    $_SESSION["message"] = "booking succeeded";
   }
 }
 
