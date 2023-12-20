@@ -50,6 +50,8 @@ if (isset($_POST["guest-name"], $_POST["transfer-code"])) {
     $statementSaveBookingInfo->execute();
 
     $_SESSION["message"] = "payment succeeded";
+    $_SESSION["pageState"] = "receipt";
+
 
     // deposit the tc to my account
     try {
@@ -77,6 +79,7 @@ if (isset($_POST["guest-name"], $_POST["transfer-code"])) {
     $statementMakeBooking->execute();
 
     $_SESSION["message"] = "payment failed";
+    $_SESSION["pageState"] = "error";
   }
 }
 

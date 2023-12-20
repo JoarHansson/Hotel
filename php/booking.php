@@ -43,7 +43,8 @@ if (isset($_POST["date-from"], $_POST["date-to"])) {
   }
 
   if (in_array(true, $roomOccupancy)) {
-    $_SESSION["message"] = "one or more dates are already booked.";
+    $_SESSION["message"] = "one or more dates are already fully booked.";
+    $_SESSION["pageState"] = "error";
   } else {
 
     // if the room is available, make the reservation (update occupancy table):
@@ -58,7 +59,14 @@ if (isset($_POST["date-from"], $_POST["date-to"])) {
     $statementMakeReservation->bindParam(":dateTo", $dateTo, PDO::PARAM_INT);
     $statementMakeReservation->execute();
 
-    $_SESSION["message"] = "reservation succeeded, now you shall pay";
+    $_SESSION["message"] = "Choose extras";
+    $_SESSION["pageState"] = "extras";
+
+    $_SESSION["reservation"] = [
+      "checkInDate" => $dateFrom,
+      "checkOutDate" => $dateTo,
+      "room" => 3 /* hard coded for now */
+    ];
   }
 }
 
