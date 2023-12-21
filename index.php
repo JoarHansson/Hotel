@@ -24,8 +24,8 @@ if ($_SESSION["pageState"] === "home") {
   require __DIR__ . "/php/extras.php";
 } else if ($_SESSION["pageState"] === "confirm") {
   require __DIR__ . "/php/confirm.php";
-} else if ($_SESSION["pageState"] === "receipt") {
-  require __DIR__ . "/php/receipt.php";
+} else if ($_SESSION["pageState"] === "success") {
+  require __DIR__ . "/php/success.php";
 } else if ($_SESSION["pageState"] === "error") {
   require __DIR__ . "/php/error.php";
 } else {

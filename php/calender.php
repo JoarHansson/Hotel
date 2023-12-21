@@ -87,7 +87,7 @@ $bookedDates = array_merge(...$bookedDates);
 </div>
 
 <!-- The hidden form is submitted in calender.js -->
-<form action="php/booking.php" method="post" id="form-make-booking" class="hidden">
+<form action="php/reservation.php" method="post" id="form-make-reservation" class="hidden">
   <input name="date-from" id="date-from" type="date" min="2024-01-01" max="2024-01-31">
   <input name="date-to" id="date-to" type="date" min="2024-01-01" max="2024-01-31">
 </form>

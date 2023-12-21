@@ -1,19 +1,19 @@
 const calender = document.querySelector(".calender");
 const instructionText = document.querySelector("#instruction-text");
-const formMakeBooking = document.querySelector("#form-make-booking");
+const formMakeReservation = document.querySelector("#form-make-reservation");
 const formInputDateFrom = document.querySelector("#date-from");
 const formInputDateTo = document.querySelector("#date-to");
 
 let requestedDateFrom;
 let requestedDateTo;
 
-// make a booking with the buttons(days) in the calender
+// make a reservation with the buttons(days) in the calender
 calender.addEventListener("click", (event) => {
   if (event.target.tagName !== "BUTTON") {
     return;
   }
 
-  // set start date of booking
+  // set start date of reservation
   if (
     requestedDateFrom === undefined &&
     event.target.classList.contains("calender-day")
@@ -37,7 +37,7 @@ calender.addEventListener("click", (event) => {
     return;
   }
 
-  // set end date of booking
+  // set end date of reservation
   if (
     requestedDateTo === undefined &&
     event.target.classList.contains("calender-day") &&
@@ -64,7 +64,7 @@ calender.addEventListener("click", (event) => {
       node.classList.add("font-bold", "bg-slate-300", "text-black");
     });
 
-    instructionText.textContent = "Confirm booking or clear selection";
+    instructionText.textContent = "Confirm reservation or clear selection";
 
     formInputDateTo.value = "2024-01-" + requestedDateTo;
 
@@ -78,7 +78,7 @@ calender.addEventListener("click", (event) => {
     requestedDateFrom != undefined &&
     requestedDateTo != undefined
   ) {
-    formMakeBooking.submit();
+    formMakeReservation.submit();
 
     return;
   }
@@ -87,8 +87,15 @@ calender.addEventListener("click", (event) => {
   if (event.target.id === "button-clear-selection") {
     requestedDateFrom = undefined;
     requestedDateTo = undefined;
-    location.reload();
 
+    const dateButtons = calender.querySelectorAll("button.calender-day");
+
+    dateButtons.forEach((dateButton) => {
+      if (dateButton.classList.contains("bg-slate-300")) {
+        dateButton.classList.remove("font-bold", "bg-slate-300", "text-black");
+        dateButton.classList.add("bg-slate-600");
+      }
+    });
     return;
   }
 });
