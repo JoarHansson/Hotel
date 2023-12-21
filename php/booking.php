@@ -9,6 +9,9 @@ if (isset($_POST["date-from"], $_POST["date-to"])) {
   $dateFrom = htmlspecialchars($_POST["date-from"]);
   $dateTo = htmlspecialchars($_POST["date-to"]);
 
+  $_SESSION["reservation"]["arrival_date"] = $dateFrom; // format: YYYY-MM-DD
+  $_SESSION["reservation"]["departure_date"] = $dateTo; // format: YYYY-MM-DD
+
   // Use only the day:
   $dateFrom = substr($dateFrom, -2);
   $dateTo = substr($dateTo, -2);
@@ -17,8 +20,8 @@ if (isset($_POST["date-from"], $_POST["date-to"])) {
   $dateFrom = intval($dateFrom);
   $dateTo = intval($dateTo);
 
-  $_SESSION["reservedDateFrom"] = $dateFrom;
-  $_SESSION["reservedDateTo"] = $dateTo;
+  $_SESSION["reservedDateFrom"] = $dateFrom; // format:  D / DD
+  $_SESSION["reservedDateTo"] = $dateTo; // format: D / DD
 
   // initialize db and get the chosen room and dates
   $db = new PDO("sqlite:../database/hotel.db");
@@ -61,12 +64,6 @@ if (isset($_POST["date-from"], $_POST["date-to"])) {
 
     $_SESSION["message"] = "Choose extras";
     $_SESSION["pageState"] = "extras";
-
-    $_SESSION["reservation"] = [
-      "checkInDate" => $dateFrom,
-      "checkOutDate" => $dateTo,
-      "room" => 3 /* hard coded for now */
-    ];
   }
 }
 

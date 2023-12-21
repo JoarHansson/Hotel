@@ -18,7 +18,7 @@ $extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
   <ul>
     <?php foreach ($extras as $key => $extraItem) : ?>
       <li>
-        <input type="checkbox" name="extra-<?php echo $key ?>" value="<?php echo $extraItem["name"] ?>">
+        <input type="checkbox" name="extra-<?php echo $key ?>" value="<?php echo $extraItem["name"] . "_$" . $extraItem["price"] ?>">
         <label for="extra-<?php echo $key ?>"><?php echo $extraItem["name"] . ": $" . $extraItem["price"] ?></label>
       </li>
     <?php endforeach; ?>
