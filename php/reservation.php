@@ -63,6 +63,8 @@ if (isset($_POST["date-from"], $_POST["date-to"])) {
     $statementMakeReservation->execute();
 
     $_SESSION["message"] = "Choose extras";
+    $_SESSION["pricePerDay"] = $_POST["pricePerDay"];
+    $_SESSION["numberOfDays"] = count(range($dateFrom, $dateTo, 1));
     $_SESSION["pageState"] = "extras";
   }
 }

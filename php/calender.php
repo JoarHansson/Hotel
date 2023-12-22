@@ -41,9 +41,27 @@ foreach ($bookings as $booking) {
 // flatten array bookedDates:
 $bookedDates = array_merge(...$bookedDates);
 
+// Get info on the chosen room:
+$statementGetRoomInfo = $db->prepare(
+  "SELECT name, base_price FROM rooms
+  WHERE id = 3"   /* id hard coded for now */
+);
+$statementGetRoomInfo->execute();
+$roomInfo = $statementGetRoomInfo->fetch(PDO::FETCH_ASSOC);
+
+
 ?>
 
+<p id="room-price-info" class="mb-4">
+  chosen room: <?php echo $roomInfo["name"] ?>
+  <br>
+  price per day:
+  <span id="price-per-day"><?php echo $roomInfo["base_price"] ?></span>
+</p>
+
 <p id="instruction-text" class="mb-4">Choose a start date</p>
+
+<p class="mb-4">total price: <span id="total-price">0</span></p>
 
 <div class="calender mb-4">
 
@@ -90,6 +108,8 @@ $bookedDates = array_merge(...$bookedDates);
 <form action="php/reservation.php" method="post" id="form-make-reservation" class="hidden">
   <input name="date-from" id="date-from" type="date" min="2024-01-01" max="2024-01-31">
   <input name="date-to" id="date-to" type="date" min="2024-01-01" max="2024-01-31">
+
+  <input name="pricePerDay" type="text" value="<?php echo $roomInfo["base_price"]  ?>">
 </form>
 
 <script src="/js/calender.js"></script>

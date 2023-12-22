@@ -21,12 +21,13 @@ if (isset($_POST["guest-name"], $_POST["transfer-code"])) {
 
   $dateFrom = $_SESSION["reservedDateFrom"];
   $dateTo = $_SESSION["reservedDateTo"];
+  $totalCost = $_SESSION["reservation"]["total_cost"];
 
   try {
     $responseCheckTransferCode = $client->request("POST", $baseUri . "transferCode", [
       "form_params" => [
         "transferCode" => $transferCode,
-        "totalcost" => "3" /* hard coded for now */
+        "totalcost" => $totalCost
       ]
     ]);
   } catch (ClientException $e) {
@@ -36,8 +37,8 @@ if (isset($_POST["guest-name"], $_POST["transfer-code"])) {
   $transferCodeStatus = json_decode($responseCheckTransferCode->getBody()->getContents());
 
   // If transfer code is valid...
-  // if ($transferCodeStatus->transferCode === $transferCode) {
-  if (1 === 1) {
+  // if (1 === 1) { // used for testing instead of line below
+  if ($transferCodeStatus->transferCode === $transferCode) {
 
     // save the booking info (insert into bookings table):
     $statementSaveBookingInfo = $db->prepare(

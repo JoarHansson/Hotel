@@ -19,10 +19,35 @@ if (isset($_POST)) {
   }
 }
 
+$costChosenFeatures = 0;
+foreach ($_SESSION["reservation"]["features"] as $feature) {
+  $costChosenFeatures += $feature["cost"];
+}
+
+$_SESSION["reservation"]["total_cost"] = ($_SESSION["numberOfDays"] * $_SESSION["pricePerDay"]) + $costChosenFeatures;
+
 ?>
 
+<p>your order details:</p>
+<p>arrival date: <?= $_SESSION["reservation"]["arrival_date"]; ?></p>
+<p>departure date: <?= $_SESSION["reservation"]["departure_date"]; ?></p>
+<br>
+<p><?= $_SESSION["numberOfDays"]; ?> days á €<?= $_SESSION["pricePerDay"]; ?></p>
+<br>
+<p>extras:</p>
+<?php foreach ($_SESSION["reservation"]["features"] as $feature) : ?>
+  <p><?= $feature["name"] ?>: $<?= $feature["cost"] ?></p>
+<?php endforeach; ?>
+<br>
+<p class="mb-4">
+  total price:
+  <span id="total-price">
+    <?= $_SESSION["reservation"]["total_cost"]; ?>
+  </span>
+</p>
+
 <form action="php/payment.php" method="post" class="flex flex-col bg-slate-900 p-4 w-96">
-  <p class="mb-4">To complete the booking, enter your name and valid transfer code of $ ___ below</p>
+  <p class="mb-4">To complete the booking, enter your name and valid transfer code of $<?= $_SESSION["reservation"]["total_cost"]; ?> below</p>
   <label for="guest-name">Name:</label>
   <input type="text" name="guest-name" class="text-black">
   <label for="transfer-code">Transfer Code:</label>

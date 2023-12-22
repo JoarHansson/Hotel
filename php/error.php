@@ -11,4 +11,5 @@ require __DIR__ . "/autoload.php";
 
 <?php
 unset($_SESSION["message"]);
+unset($_SESSION["reservation"]);
 ?>

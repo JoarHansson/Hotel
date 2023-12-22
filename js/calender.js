@@ -1,5 +1,9 @@
 const calender = document.querySelector(".calender");
+
 const instructionText = document.querySelector("#instruction-text");
+const pricePerDay = document.querySelector("#price-per-day").textContent;
+const totalPrice = document.querySelector("#total-price");
+
 const formMakeReservation = document.querySelector("#form-make-reservation");
 const formInputDateFrom = document.querySelector("#date-from");
 const formInputDateTo = document.querySelector("#date-to");
@@ -32,6 +36,9 @@ calender.addEventListener("click", (event) => {
     instructionText.textContent = "Choose an end date";
 
     formInputDateFrom.value = "2024-01-" + requestedDateFrom;
+
+    // update the price to the price of one day:
+    totalPrice.textContent = pricePerDay;
 
     // console.log(1, requestedDateFrom, event.target.value, formInputDateFrom.value);
     return;
@@ -68,6 +75,8 @@ calender.addEventListener("click", (event) => {
 
     formInputDateTo.value = "2024-01-" + requestedDateTo;
 
+    totalPrice.textContent = pricePerDay * dateButtonsSelected.length;
+
     // console.log(2, requestedDateTo, event.target.value, formInputDateTo.value);
     return;
   }
@@ -96,6 +105,10 @@ calender.addEventListener("click", (event) => {
         dateButton.classList.add("bg-slate-600");
       }
     });
+
+    // clear total price
+    totalPrice.textContent = 0;
+
     return;
   }
 });

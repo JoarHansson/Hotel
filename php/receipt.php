@@ -7,3 +7,5 @@ require __DIR__ . "/autoload.php";
 header("Content-Type: application/json");
 
 echo json_encode($_SESSION["reservation"]);
+
+unset($_SESSION["reservation"]);
