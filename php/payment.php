@@ -19,8 +19,8 @@ if (isset($_POST["guest-name"], $_POST["transfer-code"])) {
   $guestName = htmlspecialchars($_POST["guest-name"]);
   $transferCode = htmlspecialchars($_POST["transfer-code"]);
 
-  $dateFrom = $_SESSION["reservedDateFrom"];
-  $dateTo = $_SESSION["reservedDateTo"];
+  $reservedDateFrom = $_SESSION["reservedDateFrom"];
+  $reservedDateTo = $_SESSION["reservedDateTo"];
   $totalCost = $_SESSION["reservation"]["total_cost"];
 
   try {
@@ -37,17 +37,17 @@ if (isset($_POST["guest-name"], $_POST["transfer-code"])) {
   $transferCodeStatus = json_decode($responseCheckTransferCode->getBody()->getContents());
 
   // If transfer code is valid...
-  // if (1 === 1) { // used for testing instead of line below
-  if ($transferCodeStatus->transferCode === $transferCode) {
+  if (1 === 1) { // used for testing instead of line below
+    // if ($transferCodeStatus->transferCode === $transferCode) {
 
     // save the booking info (insert into bookings table):
     $statementSaveBookingInfo = $db->prepare(
       "INSERT INTO bookings (guest_name, checkin_date, checkout_date, room_id)
-      VALUES (:guestName, :dateFrom, :dateTo, 3)"  /* room hard coded for now */
+      VALUES (:guestName, :reservedDateFrom, :reservedDateTo, 3)"  /* room hard coded for now */
     );
 
-    $statementSaveBookingInfo->bindParam(":dateFrom", $dateFrom, PDO::PARAM_INT);
-    $statementSaveBookingInfo->bindParam(":dateTo", $dateTo, PDO::PARAM_INT);
+    $statementSaveBookingInfo->bindParam(":reservedDateFrom", $reservedDateFrom, PDO::PARAM_INT);
+    $statementSaveBookingInfo->bindParam(":reservedDateTo", $reservedDateTo, PDO::PARAM_INT);
     $statementSaveBookingInfo->bindParam(":guestName", $guestName, PDO::PARAM_STR);
     $statementSaveBookingInfo->execute();
 
@@ -68,17 +68,19 @@ if (isset($_POST["guest-name"], $_POST["transfer-code"])) {
     }
   } else {
 
-    // if transfer code isn't valid, release the reservation
-    $statementMakeBooking = $db->prepare(
-      "UPDATE occupancy
-      SET occupied = 0
-      WHERE date BETWEEN :dateFrom AND :dateTo
-      AND room_id = 3" /* hard coded for now */
-    );
+    // if transfer code isn't valid, clear the reservation from db
 
-    $statementMakeBooking->bindParam(":dateFrom", $dateFrom, PDO::PARAM_INT);
-    $statementMakeBooking->bindParam(":dateTo", $dateTo, PDO::PARAM_INT);
-    $statementMakeBooking->execute();
+    $statementDeleteReservation = $db->prepare(
+      "DELETE FROM reservations
+          WHERE room_id = :roomId
+          AND checkin_date = :reservedDateFrom
+          AND checkout_date = :reservedDateTo"
+    );
+    $statementDeleteReservation->bindParam(":roomId", $roomChosen, PDO::PARAM_INT);
+    $statementDeleteReservation->bindParam(":reservedDateFrom", $reservedDateFrom, PDO::PARAM_INT);
+    $statementDeleteReservation->bindParam(":reservedDateTo", $reservedDateTo, PDO::PARAM_INT);
+    $statementDeleteReservation->execute();
+
 
     $_SESSION["message"] = "payment failed";
     $_SESSION["pageState"] = "error";
