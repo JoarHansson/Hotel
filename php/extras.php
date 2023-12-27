@@ -35,7 +35,12 @@ $extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
   </ul>
 
   <input name="pageState" type="text" value="confirm" hidden>
-  <button type="submit" class="bg-emerald-500 px-4 py-2  hover:bg-emerald-400">OK</button>
+  <button type="submit" class="bg-emerald-500 px-4 py-2  hover:bg-emerald-400">Continue</button>
+</form>
+
+<form action="index.php" method="post">
+  <input name="pageState" type="text" value="home" hidden>
+  <button type="submit" class="bg-rose-500 px-4 py-2  hover:bg-rose-400">Cancel</button>
 </form>
 
 <script src="/js/extras.js"></script>

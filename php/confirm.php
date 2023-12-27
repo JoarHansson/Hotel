@@ -54,3 +54,8 @@ $_SESSION["reservation"]["total_cost"] = ($_SESSION["numberOfDays"] * $_SESSION[
   <input type="text" name="transfer-code" class="text-black mb-4">
   <button type="submit" class="bg-slate-400 text-black py-2">Confirm</button>
 </form>
+
+<form action="index.php" method="post">
+  <input name="pageState" type="text" value="home" hidden>
+  <button type="submit" class="bg-rose-500 px-4 py-2  hover:bg-rose-400">Cancel</button>
+</form>
