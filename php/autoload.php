@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . "/functions.php";
+
 session_start();
 
 if (empty($_SESSION["reservation"])) {

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require __DIR__ . "/autoload.php";
+
 $week = [
   "Monday",
   "Tuesday",
@@ -13,42 +15,57 @@ $week = [
 ];
 
 
-$db = new PDO("sqlite:" . __DIR__ . "/../database/hotel.db");
-
-// get reservations (occupancy) from db to be able to show availability in the calender UI
-$statementCheckReservations = $db->prepare(
-  "SELECT * FROM occupancy
-  WHERE occupied = true AND room_id = 3" /* room_id hard coded for now */
-);
-$statementCheckReservations->execute();
-$reservations = $statementCheckReservations->fetchAll(PDO::FETCH_ASSOC);
-
-$reservedDates = array_column($reservations, "date");
-
-// also get bookings from db to be able to show that in the calender UI as well
-$statementCheckBookings = $db->prepare(
-  "SELECT * FROM bookings
-  WHERE room_id = 3" /* room_id hard coded for now */
-);
-$statementCheckBookings->execute();
-$bookings = $statementCheckBookings->fetchAll(PDO::FETCH_ASSOC);
-
-$bookedDates = [];
-foreach ($bookings as $booking) {
-  $bookedDates[] = range($booking["checkin_date"], $booking["checkout_date"], 1);
-}
-
-// flatten array bookedDates:
-$bookedDates = array_merge(...$bookedDates);
+$roomChosen = 3; // hard coded for now.
 
 // Get info on the chosen room:
 $statementGetRoomInfo = $db->prepare(
   "SELECT name, base_price FROM rooms
-  WHERE id = 3"   /* id hard coded for now */
+  WHERE id = :id"
 );
+$statementGetRoomInfo->bindParam(":id", $roomChosen, PDO::PARAM_INT);
 $statementGetRoomInfo->execute();
 $roomInfo = $statementGetRoomInfo->fetch(PDO::FETCH_ASSOC);
 
+
+// Get data from table reservations
+$reservations = getDataFromDb("reservations", $roomChosen);
+
+$reservedDates = filterDatesFromData($reservations);
+
+// Get data from table bookings
+$bookings = getDataFromDb("bookings", $roomChosen);
+
+$bookedDates = filterDatesFromData($bookings);
+
+
+// filter out reservations that doesn't have a matching booking
+$filteredReservations = array_filter($reservations, function ($r) use ($bookedDates) {
+
+  $range = range($r["checkin_date"], $r["checkout_date"], 1);
+
+  if (array_diff($range, $bookedDates)) {
+    return true;
+  }
+});
+
+
+$timeOfPageLoad = time();
+$tenMinutesAgo =  $timeOfPageLoad - 600; // a reservation is hold for 10 minutes
+
+// delete old reservations that don't have a matching booking
+foreach ($filteredReservations as $filteredItem) {
+  $statementDeleteOldReservations = $db->prepare(
+    "DELETE FROM reservations WHERE timestamp < :tenMinutesAgo AND id = :id"
+  );
+  $statementDeleteOldReservations->bindParam(":tenMinutesAgo", $tenMinutesAgo, PDO::PARAM_INT);
+  $statementDeleteOldReservations->bindParam(":id", $filteredItem["id"], PDO::PARAM_INT);
+  $statementDeleteOldReservations->execute();
+}
+
+// select reservations again after clearing old ones
+$reservationsUpdated = getDataFromDb("reservations", $roomChosen);
+
+$reservedDatesUpdated = filterDatesFromData($reservationsUpdated);
 
 ?>
 
@@ -74,7 +91,7 @@ $roomInfo = $statementGetRoomInfo->fetch(PDO::FETCH_ASSOC);
 
   for ($i = 1; $i < 32; $i++) :
 
-    $isReserved = in_array($i, $reservedDates);
+    $isReserved = in_array($i, $reservedDatesUpdated);
     $isBooked = in_array($i, $bookedDates);
 
     $buttonClass = $isBooked ? "bg-slate-950 cursor-not-allowed"

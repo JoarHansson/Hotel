@@ -2,7 +2,11 @@
 
 declare(strict_types=1);
 
-session_start();
+require __DIR__ . "/autoload.php";
+
+$roomChosen = 3; // hard coded for now.
+
+echo "<pre>";
 
 if (isset($_POST["date-from"], $_POST["date-to"])) {
 
@@ -23,49 +27,38 @@ if (isset($_POST["date-from"], $_POST["date-to"])) {
   $_SESSION["reservedDateFrom"] = $dateFrom; // format:  D / DD
   $_SESSION["reservedDateTo"] = $dateTo; // format: D / DD
 
-  // initialize db and get the chosen room and dates
-  $db = new PDO("sqlite:../database/hotel.db");
+  $requestedDates = range($dateFrom, $dateTo, 1);
 
-  $statementCheckAvailability = $db->prepare(
-    "SELECT * FROM occupancy
-    WHERE date BETWEEN :dateFrom AND :dateTo
-    AND room_id = 3" /* hard coded for now */
-  );
+  // Get data from table reservations
+  $reservations = getDataFromDb("reservations", $roomChosen);
 
-  $statementCheckAvailability->bindParam(":dateFrom", $dateFrom, PDO::PARAM_INT);
-  $statementCheckAvailability->bindParam(":dateTo", $dateTo, PDO::PARAM_INT);
-  $statementCheckAvailability->execute();
-
-  $chosenDatesAndRoom = $statementCheckAvailability->fetchAll(PDO::FETCH_ASSOC);
+  $reservedDates = filterDatesFromData($reservations);
 
 
   // Check room availability
-  $roomOccupancy = [];
-  foreach ($chosenDatesAndRoom as $date) {
-    $roomOccupancy[] = $date["occupied"]; // 1 or 0
-  }
-
-  if (in_array(true, $roomOccupancy)) {
+  if (array_intersect($requestedDates, $reservedDates)) {
     $_SESSION["message"] = "one or more dates are already fully booked.";
     $_SESSION["pageState"] = "error";
   } else {
 
-    // if the room is available, make the reservation (update occupancy table):
+    // if the room and dates are available, make the reservation
+
+    $_SESSION["pricePerDay"] = $_POST["pricePerDay"];
+    $_SESSION["numberOfDays"] = count(range($dateFrom, $dateTo, 1));
+    $_SESSION["pageState"] = "extras";
+
+    $timeOfReservation = time();
+
     $statementMakeReservation = $db->prepare(
-      "UPDATE occupancy
-      SET occupied = 1
-      WHERE date BETWEEN :dateFrom AND :dateTo
-      AND room_id = 3" /* hard coded for now */
+      "INSERT INTO reservations (checkin_date, checkout_date, timestamp, room_id)
+      VALUES (:dateFrom, :dateTo, :timestamp, :room_id)"  /* room hard coded for now */
     );
 
     $statementMakeReservation->bindParam(":dateFrom", $dateFrom, PDO::PARAM_INT);
     $statementMakeReservation->bindParam(":dateTo", $dateTo, PDO::PARAM_INT);
+    $statementMakeReservation->bindParam(":timestamp", $timeOfReservation, PDO::PARAM_INT);
+    $statementMakeReservation->bindParam(":room_id", $roomChosen, PDO::PARAM_INT);
     $statementMakeReservation->execute();
-
-    $_SESSION["message"] = "Choose extras";
-    $_SESSION["pricePerDay"] = $_POST["pricePerDay"];
-    $_SESSION["numberOfDays"] = count(range($dateFrom, $dateTo, 1));
-    $_SESSION["pageState"] = "extras";
   }
 }
 
