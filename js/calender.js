@@ -106,8 +106,25 @@ calender.addEventListener("click", (event) => {
       }
     });
 
+    // reset instruction text
+    instructionText.textContent = "Choose a start date";
+
     // clear total price
     totalPrice.textContent = 0;
+
+    return;
+  }
+
+  // if user tries to submit the form without both values set
+  if (
+    event.target.id === "button-submit-form" &&
+    requestedDateTo === undefined
+  ) {
+    // give a visual hint to complete the form
+    instructionText.classList.add("scale-125", "transition-transform");
+    setTimeout(() => {
+      instructionText.classList.remove("scale-125");
+    }, 100);
 
     return;
   }

@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-session_start();
-
-$db = new PDO("sqlite:" . __DIR__ . "/../database/hotel.db");
+require __DIR__ . "/autoload.php";
 
 require __DIR__ . "/../vendor/autoload.php";
 

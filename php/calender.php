@@ -116,8 +116,8 @@ $reservedDatesUpdated = filterDatesFromData($reservationsUpdated);
 
   <?php endfor; ?>
 
-  <button id="button-submit-form" class="bg-emerald-600 col-span-2">OK</button>
-  <button id="button-clear-selection" class="bg-rose-600 col-span-2">CLEAR</button>
+  <button id="button-submit-form" class="bg-emerald-600 col-span-2">Continue</button>
+  <button id="button-clear-selection" class="bg-rose-600 col-span-2">Clear selection</button>
 
 </div>
 

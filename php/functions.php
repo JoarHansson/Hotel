@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-// require __DIR__ . "/autoload.php";
-
 // getDataFromDb returns all reserved or booked dates in a separate array.
 // $table works with arguments "bookings" or "reservations".
 // $roomId works with 1, 2 or 3.

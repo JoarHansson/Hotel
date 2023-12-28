@@ -11,8 +11,11 @@
 <body class="p-4 h-full bg-slate-800 flex flex-col items-center">
 
   <header class="w-full">
-    <form action="index.php" method="post" class="flex justify-between">
+    <form action="index.php" method="post" class="flex justify-between items-center">
       <button type="submit" class="button-green" name="pageState" value="home">home</button>
-      <button type="submit" class="button-green" name="pageState" value="calender">calender</button>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" class="stroke-emerald-500">
+        <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z" fill="currentColor"></path>
+      </svg>
+
     </form>
   </header>

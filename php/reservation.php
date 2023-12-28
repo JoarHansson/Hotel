@@ -6,8 +6,6 @@ require __DIR__ . "/autoload.php";
 
 $roomChosen = 3; // hard coded for now.
 
-echo "<pre>";
-
 if (isset($_POST["date-from"], $_POST["date-to"])) {
 
   $dateFrom = htmlspecialchars($_POST["date-from"]);
