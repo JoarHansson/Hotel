@@ -14,8 +14,13 @@ $week = [
   "Sunday"
 ];
 
+if (isset($_POST["roomType"])) {
+  $_SESSION["roomType"] = intval($_POST["roomType"]);
+} else {
+  $_SESSION["roomType"] = 3; // === deluxe, the default choice
+}
 
-$roomChosen = 3; // hard coded for now.
+$roomChosen = $_SESSION["roomType"];
 
 // Get info on the chosen room:
 $statementGetRoomInfo = $db->prepare(
@@ -79,6 +84,12 @@ $reservedDatesUpdated = filterDatesFromData($reservationsUpdated);
 <p id="instruction-text" class="mb-4">Choose a start date</p>
 
 <p class="mb-4">total price: <span id="total-price">0</span></p>
+
+<form action="index.php" method="post">
+  <button name="roomType" type="submit" value="1" class="m-2 p-2 border <?= ($roomChosen === 1) ? "border-emerald-500" : "" ?>">economy</button>
+  <button name="roomType" type="submit" value="2" class="m-2 p-2 border <?= ($roomChosen === 2) ? "border-emerald-500" : "" ?>">standard</button>
+  <button name="roomType" type="submit" value="3" class="m-2 p-2 border <?= ($roomChosen === 3) ? "border-emerald-500" : "" ?>">deluxe</button>
+</form>
 
 <div class="calender mb-4">
 

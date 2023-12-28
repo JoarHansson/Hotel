@@ -69,7 +69,7 @@ foreach ($tables as $table) {
 // Insert into rooms
 $statementInsertIntoRooms = $db->prepare(
   "INSERT INTO rooms (name, base_price)
-  VALUES ('economy', 5), ('standard', 7), ('luxury', 10)"
+  VALUES ('economy', 5), ('standard', 7), ('deluxe', 10)"
 );
 $statementInsertIntoRooms->execute();
 

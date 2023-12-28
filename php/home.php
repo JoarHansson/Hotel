@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require __DIR__ . "/autoload.php";
 
-$roomChosen = 3; // hard coded for now.
+$roomChosen = $_SESSION["roomType"];
 
 // if the home button or cancel button is pressed throughout the booking process,
 // the reservation is cleared and the user can start the booking process over.

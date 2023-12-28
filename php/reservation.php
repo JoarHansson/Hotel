@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require __DIR__ . "/autoload.php";
 
-$roomChosen = 3; // hard coded for now.
+$roomChosen = $_SESSION["roomType"];
 
 if (isset($_POST["date-from"], $_POST["date-to"])) {
 
@@ -49,7 +49,7 @@ if (isset($_POST["date-from"], $_POST["date-to"])) {
 
     $statementMakeReservation = $db->prepare(
       "INSERT INTO reservations (checkin_date, checkout_date, timestamp, room_id)
-      VALUES (:dateFrom, :dateTo, :timestamp, :room_id)"  /* room hard coded for now */
+      VALUES (:dateFrom, :dateTo, :timestamp, :room_id)"
     );
 
     $statementMakeReservation->bindParam(":dateFrom", $dateFrom, PDO::PARAM_INT);

@@ -12,6 +12,7 @@ use GuzzleHttp\Exception\ClientException;
 $client = new Client();
 $baseUri = "https://www.yrgopelag.se/centralbank/";
 
+$roomChosen = $_SESSION["roomType"];
 
 if (isset($_POST["guest-name"], $_POST["transfer-code"])) {
   $guestName = htmlspecialchars($_POST["guest-name"]);
@@ -35,18 +36,19 @@ if (isset($_POST["guest-name"], $_POST["transfer-code"])) {
   $transferCodeStatus = json_decode($responseCheckTransferCode->getBody()->getContents());
 
   // If transfer code is valid...
-  if (1 === 1) { // used for testing instead of line below
-    // if ($transferCodeStatus->transferCode === $transferCode) {
+  // if (1 === 1) { // used for testing instead of line below
+  if ($transferCodeStatus->transferCode === $transferCode) {
 
     // save the booking info (insert into bookings table):
     $statementSaveBookingInfo = $db->prepare(
       "INSERT INTO bookings (guest_name, checkin_date, checkout_date, room_id)
-      VALUES (:guestName, :reservedDateFrom, :reservedDateTo, 3)"  /* room hard coded for now */
+      VALUES (:guestName, :reservedDateFrom, :reservedDateTo, :room_id)"
     );
 
     $statementSaveBookingInfo->bindParam(":reservedDateFrom", $reservedDateFrom, PDO::PARAM_INT);
     $statementSaveBookingInfo->bindParam(":reservedDateTo", $reservedDateTo, PDO::PARAM_INT);
     $statementSaveBookingInfo->bindParam(":guestName", $guestName, PDO::PARAM_STR);
+    $statementSaveBookingInfo->bindParam(":room_id", $roomChosen, PDO::PARAM_INT);
     $statementSaveBookingInfo->execute();
 
     $_SESSION["message"] = "payment succeeded";
