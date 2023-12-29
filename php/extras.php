@@ -4,11 +4,25 @@ declare(strict_types=1);
 
 require __DIR__ . "/autoload.php";
 
+$roomChosen = $_SESSION["roomType"];
+
 // get all extra items from db
 $statementGetExtras = $db->prepare("SELECT * FROM extras");
 $statementGetExtras->execute();
 
 $extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
+
+if ($roomChosen === 3) {
+  // deluxe room: 5 features free
+  for ($i = 0; $i < 5; $i++) {
+    $extras[$i]["price"] = 0;
+  }
+} else if ($roomChosen === 2) {
+  // standard room: 3 features free
+  for ($i = 0; $i < 3; $i++) {
+    $extras[$i]["price"] = 0;
+  }
+}
 
 ?>
 
@@ -21,14 +35,20 @@ $extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
   </span>
 </p>
 
-
 <form action="index.php" method="post">
   <ul>
     <?php foreach ($extras as $key => $extraItem) : ?>
-      <li>
-        <input type="checkbox" name="extra-<?php echo $key ?>" value="<?php echo $extraItem["name"] . "_$" . $extraItem["price"] ?>" class="extra-items">
-        <label for="extra-<?php echo $key ?>"><?php echo $extraItem["name"] . ": $" . $extraItem["price"] ?></label>
-      </li>
+      <?php if ($extraItem["price"] === 0) : ?>
+        <li>
+          <input checked type="checkbox" name="extra-<?php echo $key ?>" value="<?php echo $extraItem["name"] . "_$" . $extraItem["price"] ?>" class="extra-items">
+          <label for="extra-<?php echo $key ?>"><?php echo $extraItem["name"] . ": $" . $extraItem["price"] ?></label>
+        </li>
+      <?php else : ?>
+        <li>
+          <input type="checkbox" name="extra-<?php echo $key ?>" value="<?php echo $extraItem["name"] . "_$" . $extraItem["price"] ?>" class="extra-items">
+          <label for="extra-<?php echo $key ?>"><?php echo $extraItem["name"] . ": $" . $extraItem["price"] ?></label>
+        </li>
+      <?php endif; ?>
     <?php endforeach; ?>
   </ul>
 
