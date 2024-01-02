@@ -72,6 +72,6 @@ if (isset($_SESSION["reservedDateFrom"], $_SESSION["reservedDateTo"])) {
 
   <form action="index.php" method="post" class="w-full text-center">
     <input name="pageState" type="text" value="calender" hidden>
-    <button type="submit" class="bg-cyan-300 text-cyan-950 px-8 py-2 font-extrabold uppercase hover:bg-cyan-200 text-xl rounded-full shadow-cyan-950/25 shadow-xl">Book a room</button>
+    <button type="submit" class="button-cyan">Book a room</button>
   </form>
 </div>
