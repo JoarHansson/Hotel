@@ -16,30 +16,37 @@ if (isset($_POST["pageState"])) {
   }
 }
 
-if ($_SESSION["pageState"] === "home") {
-  require __DIR__ . "/php/home.php";
-} else if ($_SESSION["pageState"] === "calender") {
-  require __DIR__ . "/php/calender.php";
-} else if ($_SESSION["pageState"] === "extras") {
-  require __DIR__ . "/php/extras.php";
-} else if ($_SESSION["pageState"] === "confirm") {
-  require __DIR__ . "/php/confirm.php";
-} else if ($_SESSION["pageState"] === "success") {
-  require __DIR__ . "/php/success.php";
-} else if ($_SESSION["pageState"] === "error") {
-  require __DIR__ . "/php/error.php";
-} else {
-  require __DIR__ . "/php/home.php";
-}
-
-echo "<pre>";
-echo "session:\n";
-print_r($_SESSION);
-echo "post:\n";
-print_r($_POST);
-
 ?>
 
+<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+
+  <?php
+
+  if ($_SESSION["pageState"] === "home") {
+    require __DIR__ . "/php/home.php";
+  } else if ($_SESSION["pageState"] === "calender") {
+    require __DIR__ . "/php/calender.php";
+  } else if ($_SESSION["pageState"] === "extras") {
+    require __DIR__ . "/php/extras.php";
+  } else if ($_SESSION["pageState"] === "confirm") {
+    require __DIR__ . "/php/confirm.php";
+  } else if ($_SESSION["pageState"] === "success") {
+    require __DIR__ . "/php/success.php";
+  } else if ($_SESSION["pageState"] === "error") {
+    require __DIR__ . "/php/error.php";
+  } else {
+    require __DIR__ . "/php/home.php";
+  }
+
+  // echo "<pre>";
+  // echo "session:\n";
+  // print_r($_SESSION);
+  // echo "post:\n";
+  // print_r($_POST);
+
+  ?>
+
+</div>
 </body>
 
 </html>

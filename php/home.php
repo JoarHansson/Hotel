@@ -67,12 +67,11 @@ if (isset($_SESSION["reservedDateFrom"], $_SESSION["reservedDateTo"])) {
 }
 
 ?>
+<div class="flex flex-col">
+  <h1 class="mb-8 text-center text-5xl font-extrabold font-sans italic leading-relaxed text-cyan-950 underline underline-offset-8 decoration-wavy decoration-cyan-300">Welcome to The Ice Hotel</h1>
 
-<h1 class="mb-4">Welcome to the ___ hotel!</h1>
-
-<div class="mb-4 w-96 h-64 bg-yellow-500 text-center">image</div>
-
-<form action="index.php" method="post">
-  <input name="pageState" type="text" value="calender" hidden>
-  <button type="submit" class="bg-emerald-500 px-4 py-2  hover:bg-emerald-400">Book a room</button>
-</form>
+  <form action="index.php" method="post" class="w-full text-center">
+    <input name="pageState" type="text" value="calender" hidden>
+    <button type="submit" class="bg-cyan-300 text-cyan-950 px-8 py-2 font-extrabold uppercase hover:bg-cyan-200 text-xl rounded-full shadow-cyan-950/25 shadow-xl">Book a room</button>
+  </form>
+</div>

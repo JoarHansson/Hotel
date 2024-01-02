@@ -1,8 +1,8 @@
 * {
   box-sizing: border-box;
-  color: whitesmoke;
+  @apply text-sky-950;
 }
 
 button.button-green {
-  @apply bg-emerald-500 px-4 py-2  hover:bg-emerald-400;
+  @apply bg-emerald-500 px-4 py-2 hover:bg-emerald-400;
 }
