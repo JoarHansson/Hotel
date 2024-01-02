@@ -34,3 +34,17 @@ function filterDatesFromData(array $dataRows): array
   // returned flattened array $dates:
   return array_merge(...$dates);
 }
+
+// get the price of a room from db by its name
+function getRoomPrice(string $roomName): int
+{
+  $db = new PDO("sqlite:" . __DIR__ . "/../database/hotel.db");
+
+  $statementGetPrice = $db->prepare(
+    "SELECT base_price FROM rooms
+  WHERE name = :name"
+  );
+  $statementGetPrice->bindParam(":name", $roomName, PDO::PARAM_STR);
+  $statementGetPrice->execute();
+  return $statementGetPrice->fetch(PDO::FETCH_ASSOC)["base_price"];
+}

@@ -72,7 +72,122 @@ $reservationsUpdated = getDataFromDb("reservations", $roomChosen);
 
 $reservedDatesUpdated = filterDatesFromData($reservationsUpdated);
 
+// get all extra items from db
+$statementGetExtras = $db->prepare("SELECT * FROM extras");
+$statementGetExtras->execute();
+
+$extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
+
+
+<h1 class="mb-16 text-center text-5xl font-extrabold font-sans italic leading-relaxed text-cyan-950">Our rooms</h1>
+
+<form action="index.php" method="post" class="mb-16 mx-auto grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+
+  <!-- economy: -->
+  <button name="roomType" type="submit" value="1" class=" bg-orange-950 rounded-3xl p-8 shadow-orange-950/25 shadow-xl">
+    <div class="flex items-center justify-between gap-x-4 bg-orange-400 -m-8 mb-8 p-8 rounded-t-2xl">
+      <h3 class="text-xl font-extrabold leading-8 text-orange-950 <?= ($roomChosen === 1) ? "underline underline-offset-8 decoration-4" : "" ?>">Economy</h3>
+      <p class="rounded-full bg-orange-950 px-6 py-2 text-sm font-bold leading-5 text-orange-400 shadow-orange-950/25 shadow-xl">$<?= getRoomPrice("economy") /* see functions.php */ ?> / day</p>
+    </div>
+
+    <ul role="list" class="mt-6 space-y-3 text-sm leading-6 xl:mt-8">
+
+      <?php $counter = 0;
+      foreach ($extras as $extraItem) :
+        if ($counter < 0) : ?>
+          <li class="flex gap-x-3 items-center">
+            <!-- included: -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 fill-emerald-600 stroke-orange-950">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M 9 12.75 L 11.25 15 M 11.25 15 L 15 9.75 M 21 12 A 9 9 0 1 1 3 12 A 9 9 0 0 1 21 12 Z" />
+            </svg>
+            <p class="text-orange-100"><?php echo $extraItem["name"]; ?></p>
+          </li>
+        <?php else : ?>
+          <li class="flex gap-x-3 items-center">
+            <!-- not included: -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 fill-rose-600 stroke-orange-950">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <p class="text-orange-100"><?php echo $extraItem["name"]; ?></p>
+          </li>
+        <?php endif; ?>
+      <?php $counter++;
+      endforeach; ?>
+
+    </ul>
+  </button>
+
+  <!-- standard: -->
+  <button name="roomType" type="submit" value="2" class=" bg-purple-950 rounded-3xl p-8 shadow-purple-950/25 shadow-xl">
+    <div class="flex items-center justify-between gap-x-4 bg-purple-400 -m-8 mb-8 p-8 rounded-t-2xl">
+      <h3 class="text-xl font-extrabold leading-8 text-purple-950 <?= ($roomChosen === 2) ? "underline underline-offset-8 decoration-4" : "" ?>">Standard</h3>
+      <p class="rounded-full bg-purple-950 px-4 py-2 text-sm font-bold leading-5 text-purple-400 shadow-purple-950/25 shadow-xl">$ <?= getRoomPrice("standard") ?> / day</p>
+    </div>
+
+    <ul role="list" class="mt-6 space-y-3 text-sm leading-6 xl:mt-8">
+
+      <?php $counter = 0;
+      foreach ($extras as $extraItem) :
+        if ($counter < 3) : ?>
+          <li class="flex gap-x-3 items-center">
+            <!-- included: -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 fill-emerald-600 stroke-purple-950">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M 9 12.75 L 11.25 15 M 11.25 15 L 15 9.75 M 21 12 A 9 9 0 1 1 3 12 A 9 9 0 0 1 21 12 Z" />
+            </svg>
+            <p class="text-purple-100"><?php echo $extraItem["name"]; ?></p>
+          </li>
+        <?php else : ?>
+          <li class="flex gap-x-3 items-center">
+            <!-- not included: -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 fill-rose-600 stroke-purple-950">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <p class="text-purple-100"><?php echo $extraItem["name"]; ?></p>
+          </li>
+        <?php endif; ?>
+      <?php $counter++;
+      endforeach; ?>
+
+    </ul>
+  </button>
+
+  <!-- deluxe: -->
+  <button name="roomType" type="submit" value="3" class=" bg-yellow-950 rounded-3xl p-8 shadow-yellow-950/50 shadow-xl">
+    <div class="flex items-center justify-between gap-x-4 bg-yellow-400 -m-8 mb-8 p-8 rounded-t-2xl">
+      <h3 class="text-xl font-extrabold leading-8 text-yellow-950 <?= ($roomChosen === 3) ? "underline underline-offset-8 decoration-4" : "" ?>">Deluxe</h3>
+      <p class="rounded-full bg-yellow-950 px-6 py-2 text-sm font-bold leading-5 text-yellow-400 shadow-yellow-950/25 shadow-xl">$ <?= getRoomPrice("deluxe") ?> / day</p>
+    </div>
+
+    <ul role="list" class="mt-6 space-y-3 text-sm leading-6 xl:mt-8">
+
+      <?php $counter = 0;
+      foreach ($extras as $extraItem) :
+        if ($counter < 5) : ?>
+          <li class="flex gap-x-3 items-center">
+            <!-- included: -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 fill-emerald-600 stroke-yellow-950">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M 9 12.75 L 11.25 15 M 11.25 15 L 15 9.75 M 21 12 A 9 9 0 1 1 3 12 A 9 9 0 0 1 21 12 Z" />
+            </svg>
+            <p class="text-yellow-100"><?php echo $extraItem["name"]; ?></p>
+          </li>
+        <?php else : ?>
+          <li class="flex gap-x-3 items-center">
+            <!-- not included: -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 fill-rose-600 stroke-yellow-950">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+            <p class="text-yellow-100"><?php echo $extraItem["name"]; ?></p>
+          </li>
+        <?php endif; ?>
+      <?php $counter++;
+      endforeach; ?>
+
+    </ul>
+  </button>
+</form>
+
 
 <p id="room-price-info" class="mb-4">
   chosen room: <?php echo $roomInfo["name"] ?>
@@ -85,11 +200,6 @@ $reservedDatesUpdated = filterDatesFromData($reservationsUpdated);
 
 <p class="mb-4">total price: <span id="total-price">0</span></p>
 
-<form action="index.php" method="post">
-  <button name="roomType" type="submit" value="1" class="m-2 p-2 border <?= ($roomChosen === 1) ? "border-emerald-500" : "" ?>">economy</button>
-  <button name="roomType" type="submit" value="2" class="m-2 p-2 border <?= ($roomChosen === 2) ? "border-emerald-500" : "" ?>">standard</button>
-  <button name="roomType" type="submit" value="3" class="m-2 p-2 border <?= ($roomChosen === 3) ? "border-emerald-500" : "" ?>">deluxe</button>
-</form>
 
 <div class="calender mb-4">
 
