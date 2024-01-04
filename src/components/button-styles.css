@@ -1,0 +1,11 @@
+button.button-green {
+  @apply bg-emerald-300 text-emerald-950 px-8 py-2 font-extrabold uppercase hover:bg-emerald-200 text-lg rounded-full shadow-emerald-950/10 shadow-xl;
+}
+
+button.button-red {
+  @apply bg-rose-300 text-rose-950 px-8 py-2 font-extrabold uppercase hover:bg-rose-200 text-lg rounded-full shadow-rose-950/10 shadow-xl;
+}
+
+button.button-cyan {
+  @apply bg-cyan-300 text-cyan-950 px-8 py-2 font-extrabold uppercase hover:bg-cyan-200 text-lg rounded-full shadow-cyan-950/10 shadow-xl;
+}
