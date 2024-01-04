@@ -67,8 +67,9 @@ if (isset($_SESSION["reservedDateFrom"], $_SESSION["reservedDateTo"])) {
 }
 
 ?>
+
 <div class="flex flex-col">
-  <h1 class="mb-8 text-center text-5xl font-extrabold font-sans italic leading-relaxed text-cyan-950 underline underline-offset-8 decoration-wavy decoration-cyan-300">Welcome to The Ice Hotel</h1>
+  <h1 class="mb-8 text-center text-5xl font-extrabold font-sans italic leading-relaxed text-cyan-950 underline underline-offset-8 decoration-8">Welcome to The Ice Hotel</h1>
 
   <form action="index.php" method="post" class="w-full text-center">
     <input name="pageState" type="text" value="calender" hidden>

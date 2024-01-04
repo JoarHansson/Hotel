@@ -18,7 +18,7 @@ if (isset($_POST["pageState"])) {
 
 ?>
 
-<div class="container mx-auto px-4 sm:px-6 lg:px-8">
+<div class="container mx-auto pb-16 px-4 sm:px-6 lg:px-8">
 
   <?php
 
