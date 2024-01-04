@@ -1,6 +1,9 @@
 const totalPrice = document.querySelector("#total-price");
 const extraItems = document.querySelectorAll(".extra-items");
 
+const formExtras = document.querySelector("#form-extras");
+const buttonSubmitExtras = document.querySelector("#button-submit-extras");
+
 // update total price shown, based on which checkboxes are checked
 extraItems.forEach((item) => {
   item.addEventListener("click", (event) => {
@@ -14,4 +17,8 @@ extraItems.forEach((item) => {
         Number(event.target.value.substr(-1, 1));
     }
   });
+});
+
+buttonSubmitExtras.addEventListener("click", () => {
+  formExtras.submit();
 });

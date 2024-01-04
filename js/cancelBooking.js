@@ -1,4 +1,6 @@
 const formCancelBooking = document.querySelector("#form-cancel-booking");
+const buttonCancelBooking = document.querySelector("#button-cancel-booking");
+
 const countDown = document.querySelector("#count-down");
 
 minutes = 4;
@@ -24,3 +26,8 @@ let interval = setInterval(() => {
 setTimeout(() => {
   formCancelBooking.submit();
 }, 300000); // 5 minutes
+
+// cancel the booking if the cancel button is clicked
+buttonCancelBooking.addEventListener("click", () => {
+  formCancelBooking.submit();
+});
