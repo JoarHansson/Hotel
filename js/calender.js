@@ -1,4 +1,4 @@
-const calender = document.querySelector(".calender");
+const calender = document.querySelector("#calender");
 
 const instructionText = document.querySelector("#instruction-text");
 const pricePerDay = document.querySelector("#price-per-day").textContent;
@@ -30,8 +30,12 @@ calender.addEventListener("click", (event) => {
     }
 
     //  visually distinguish chosen start date:
-    event.target.classList.remove("bg-slate-600");
-    event.target.classList.add("font-bold", "bg-slate-300", "text-black");
+    event.target.classList.remove("bg-cyan-600");
+    event.target.classList.add(
+      "font-extrabold",
+      "bg-cyan-300",
+      "text-cyan-950"
+    );
 
     instructionText.textContent = "Choose an end date";
 
@@ -67,8 +71,8 @@ calender.addEventListener("click", (event) => {
     );
 
     dateButtonsSelected.forEach((node) => {
-      node.classList.remove("bg-slate-600");
-      node.classList.add("font-bold", "bg-slate-300", "text-black");
+      node.classList.remove("bg-cyan-600");
+      node.classList.add("font-extrabold", "bg-cyan-300", "text-cyan-950");
     });
 
     instructionText.textContent = "Confirm reservation or clear selection";
@@ -100,9 +104,13 @@ calender.addEventListener("click", (event) => {
     const dateButtons = calender.querySelectorAll("button.calender-day");
 
     dateButtons.forEach((dateButton) => {
-      if (dateButton.classList.contains("bg-slate-300")) {
-        dateButton.classList.remove("font-bold", "bg-slate-300", "text-black");
-        dateButton.classList.add("bg-slate-600");
+      if (dateButton.classList.contains("bg-cyan-300")) {
+        dateButton.classList.remove(
+          "font-extrabold",
+          "bg-cyan-300",
+          "text-cyan-950"
+        );
+        dateButton.classList.add("bg-cyan-600");
       }
     });
 

@@ -81,15 +81,15 @@ $extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
-<h1 class="mb-16 text-center text-5xl font-extrabold font-sans italic leading-relaxed text-cyan-950">Our rooms</h1>
+<h1 class="mb-16 text-center text-5xl font-extrabold font-sans italic leading-relaxed text-cyan-950 underline underline-offset-8 decoration-8">The rooms</h1>
 
-<form action="index.php" method="post" class="mb-16 mx-auto grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+<form action="index.php" method="post" class="mb-24 mx-auto grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
 
   <!-- economy: -->
-  <button name="roomType" type="submit" value="1" class=" bg-orange-950 rounded-3xl p-8 shadow-orange-950/25 shadow-xl">
-    <div class="flex items-center justify-between gap-x-4 bg-orange-400 -m-8 mb-8 p-8 rounded-t-2xl">
-      <h3 class="text-xl font-extrabold leading-8 text-orange-950 <?= ($roomChosen === 1) ? "underline underline-offset-8 decoration-4" : "" ?>">Economy</h3>
-      <p class="rounded-full bg-orange-950 px-6 py-2 text-sm font-bold leading-5 text-orange-400 shadow-orange-950/25 shadow-xl">$<?= getRoomPrice("economy") /* see functions.php */ ?> / day</p>
+  <button name="roomType" type="submit" value="1" class=" bg-blue-950 rounded-3xl p-8 shadow-blue-950/25 shadow-xl hover:bg-blue-900 <?= ($roomChosen === 1) ? "ring-blue-400 ring-8" : "" ?>">
+    <div class="flex items-center justify-between gap-x-4 bg-blue-400 -m-8 mb-8 p-8 rounded-t-2xl">
+      <h3 class="text-xl font-extrabold leading-8 text-blue-950 <?= ($roomChosen === 1) ? "underline underline-offset-8 decoration-4" : "" ?>">Economy</h3>
+      <p class="rounded-full bg-blue-950 px-6 py-2 text-sm font-bold leading-5 text-blue-400 shadow-blue-950/25 shadow-xl">$<?= getRoomPrice("economy") /* see functions.php */ ?> / day</p>
     </div>
 
     <ul role="list" class="mt-6 space-y-3 text-sm leading-6 xl:mt-8">
@@ -99,18 +99,18 @@ $extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
         if ($counter < 0) : ?>
           <li class="flex gap-x-3 items-center">
             <!-- included: -->
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 fill-emerald-600 stroke-orange-950">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M 9 12.75 L 11.25 15 M 11.25 15 L 15 9.75 M 21 12 A 9 9 0 1 1 3 12 A 9 9 0 0 1 21 12 Z" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-emerald-600 stroke-emerald-600">
+              <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
             </svg>
-            <p class="text-orange-100"><?php echo $extraItem["name"]; ?></p>
+            <p class="text-blue-400"><?php echo $extraItem["name"]; ?></p>
           </li>
         <?php else : ?>
           <li class="flex gap-x-3 items-center">
             <!-- not included: -->
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 fill-rose-600 stroke-orange-950">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-rose-600 stroke-rose-600">
+              <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
             </svg>
-            <p class="text-orange-100"><?php echo $extraItem["name"]; ?></p>
+            <p class="text-blue-400"><?php echo $extraItem["name"]; ?></p>
           </li>
         <?php endif; ?>
       <?php $counter++;
@@ -120,7 +120,7 @@ $extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
   </button>
 
   <!-- standard: -->
-  <button name="roomType" type="submit" value="2" class=" bg-purple-950 rounded-3xl p-8 shadow-purple-950/25 shadow-xl">
+  <button name="roomType" type="submit" value="2" class=" bg-purple-950 rounded-3xl p-8 shadow-purple-950/25 shadow-xl hover:bg-purple-900 <?= ($roomChosen === 2) ? "ring-purple-400 ring-8" : "" ?>">
     <div class="flex items-center justify-between gap-x-4 bg-purple-400 -m-8 mb-8 p-8 rounded-t-2xl">
       <h3 class="text-xl font-extrabold leading-8 text-purple-950 <?= ($roomChosen === 2) ? "underline underline-offset-8 decoration-4" : "" ?>">Standard</h3>
       <p class="rounded-full bg-purple-950 px-4 py-2 text-sm font-bold leading-5 text-purple-400 shadow-purple-950/25 shadow-xl">$ <?= getRoomPrice("standard") ?> / day</p>
@@ -133,18 +133,18 @@ $extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
         if ($counter < 3) : ?>
           <li class="flex gap-x-3 items-center">
             <!-- included: -->
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 fill-emerald-600 stroke-purple-950">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M 9 12.75 L 11.25 15 M 11.25 15 L 15 9.75 M 21 12 A 9 9 0 1 1 3 12 A 9 9 0 0 1 21 12 Z" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-emerald-600 stroke-emerald-600">
+              <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
             </svg>
-            <p class="text-purple-100"><?php echo $extraItem["name"]; ?></p>
+            <p class="text-purple-400"><?php echo $extraItem["name"]; ?></p>
           </li>
         <?php else : ?>
           <li class="flex gap-x-3 items-center">
             <!-- not included: -->
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 fill-rose-600 stroke-purple-950">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-rose-600 stroke-rose-600">
+              <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
             </svg>
-            <p class="text-purple-100"><?php echo $extraItem["name"]; ?></p>
+            <p class="text-purple-400"><?php echo $extraItem["name"]; ?></p>
           </li>
         <?php endif; ?>
       <?php $counter++;
@@ -154,8 +154,8 @@ $extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
   </button>
 
   <!-- deluxe: -->
-  <button name="roomType" type="submit" value="3" class=" bg-yellow-950 rounded-3xl p-8 shadow-yellow-950/50 shadow-xl">
-    <div class="flex items-center justify-between gap-x-4 bg-yellow-400 -m-8 mb-8 p-8 rounded-t-2xl">
+  <button name="roomType" type="submit" value="3" class=" bg-yellow-950 rounded-3xl p-8 shadow-yellow-950/25 shadow-xl hover:bg-yellow-900 <?= ($roomChosen === 3) ? "ring-yellow-400 ring-8" : "" ?>">
+    <div class="flex items-center justify-between gap-x-4 bg-yellow-400 -m-8 mb-8 p-8 rounded-t-2xl ">
       <h3 class="text-xl font-extrabold leading-8 text-yellow-950 <?= ($roomChosen === 3) ? "underline underline-offset-8 decoration-4" : "" ?>">Deluxe</h3>
       <p class="rounded-full bg-yellow-950 px-6 py-2 text-sm font-bold leading-5 text-yellow-400 shadow-yellow-950/25 shadow-xl">$ <?= getRoomPrice("deluxe") ?> / day</p>
     </div>
@@ -167,18 +167,18 @@ $extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
         if ($counter < 5) : ?>
           <li class="flex gap-x-3 items-center">
             <!-- included: -->
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 fill-emerald-600 stroke-yellow-950">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M 9 12.75 L 11.25 15 M 11.25 15 L 15 9.75 M 21 12 A 9 9 0 1 1 3 12 A 9 9 0 0 1 21 12 Z" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-emerald-600 stroke-emerald-600">
+              <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
             </svg>
-            <p class="text-yellow-100"><?php echo $extraItem["name"]; ?></p>
+            <p class="text-yellow-400"><?php echo $extraItem["name"]; ?></p>
           </li>
         <?php else : ?>
           <li class="flex gap-x-3 items-center">
             <!-- not included: -->
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 fill-rose-600 stroke-yellow-950">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-rose-600 stroke-rose-600">
+              <path fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
             </svg>
-            <p class="text-yellow-100"><?php echo $extraItem["name"]; ?></p>
+            <p class="text-yellow-400"><?php echo $extraItem["name"]; ?></p>
           </li>
         <?php endif; ?>
       <?php $counter++;
@@ -189,56 +189,83 @@ $extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
 </form>
 
 
-<p id="room-price-info" class="mb-4">
-  chosen room: <?php echo $roomInfo["name"] ?>
-  <br>
-  price per day:
-  <span id="price-per-day"><?php echo $roomInfo["base_price"] ?></span>
-</p>
+<div id="calender" class="bg-cyan-50 p-4 lg:p-8 mx-auto grid max-w-md lg:max-w-3xl rounded-3xl shadow-cyan-50/25 shadow-xl">
 
-<p id="instruction-text" class="mb-4">Choose a start date</p>
+  <h2 id="instruction-text" class="mb-8 text-center text-2xl font-extrabold leading-relaxed">Choose a start date</h2>
 
-<p class="mb-4">total price: <span id="total-price">0</span></p>
+  <div class="mb-8 mx-auto grid gap-1 grid-cols-7 w-full">
+
+    <div class="text-center text-base font-bold">Mon</div>
+    <div class="text-center text-base font-bold">Tue</div>
+    <div class="text-center text-base font-bold">Wed</div>
+    <div class="text-center text-base font-bold">Thu</div>
+    <div class="text-center text-base font-bold">Fri</div>
+    <div class="text-center text-base font-bold">Sat</div>
+    <div class="text-center text-base font-bold">Sun</div>
+
+    <?php
+
+    // Create month with 31 days and week starting on the 1st (Jan 2024)
+    // The counter helps to assign the correct weekday to each date
+
+    $counter = 0;
+
+    for ($i = 1; $i < 32; $i++) :
+
+      $isReserved = in_array($i, $reservedDatesUpdated);
+      $isBooked = in_array($i, $bookedDates);
 
 
-<div class="calender mb-4">
+      $buttonClass = $isBooked ? "bg-cyan-950 cursor-not-allowed"
+        : ($isReserved  ? "bg-cyan-800 cursor-not-allowed" : "bg-cyan-600");
 
-  <?php
+      $disabledStatus = $isReserved ? "disabled" : "";
 
-  // Create month with 31 days and week starting on the 1st (Jan 2024)
-  // The counter helps to assign the correct weekday to each date
+      $weekday;
 
-  $counter = 0;
+      if (isset($week[$counter])) {
+        $weekday = $week[$counter];
+      } else {
+        $weekday = "Monday";
+        $counter = 0;
+      }
 
-  for ($i = 1; $i < 32; $i++) :
+      $counter++; ?>
 
-    $isReserved = in_array($i, $reservedDatesUpdated);
-    $isBooked = in_array($i, $bookedDates);
+      <button <?= $disabledStatus ?> value="<?= $i ?>" id="calender-day-<?= $i ?>" class="calender-day py-4 text-base font-bold rounded-sm text-cyan-50 <?= "{$weekday} {$buttonClass}"; ?>">
+        <?= $i ?>
+      </button>
 
-    $buttonClass = $isBooked ? "bg-slate-950 cursor-not-allowed"
-      : ($isReserved  ? "bg-slate-900 cursor-not-allowed" : "bg-slate-600");
+    <?php endfor; ?>
 
-    $disabledStatus = $isReserved ? "disabled" : "";
+  </div>
 
-    $weekday;
+  <div class="flex flex-col-reverse lg:flex-row justify-between items-start">
 
-    if (isset($week[$counter])) {
-      $weekday = $week[$counter];
-    } else {
-      $weekday = "Monday";
-      $counter = 0;
-    }
+    <ul class="text-sm lg:text-base mx-auto lg:mr-auto lg:ml-0 font-bold leading-loose"> <!-- underline underline-offset-8 decoration-4 -->
+      <li>Chosen room: <span class="capitalize"><?php echo $roomInfo["name"] ?></span></li>
+      <li>Price per day: $<span id="price-per-day"><?php echo $roomInfo["base_price"] ?></span></li>
+      <li class="text-2xl bg-cyan-950 text-cyan-50 p-2 my-2">Your total: $<span class="text-cyan-50" id="total-price">0</span></li>
+      <li class="flex items-center gap-2">
+        <span class="w-4 h-4 bg-cyan-600"></span>
+        <span>- Available</span>
+      </li>
+      <li class="flex items-center gap-2">
+        <span class="w-4 h-4 bg-cyan-800"></span>
+        <span>- Reserved (check back soon)</span>
+      </li>
+      <li class="flex items-center gap-2">
+        <span class="w-4 h-4 bg-cyan-950"></span>
+        <span>- Already booked</span>
+      </li>
+    </ul>
 
-    $counter++; ?>
+    <div class="flex flex-col justify-center mx-auto lg:ml-auto lg:mr-0 gap-4 mb-8">
+      <button id="button-submit-form" class="button-green">Continue</button>
+      <button id="button-clear-selection" class="button-red">Clear selection</button>
+    </div>
 
-    <button <?= $disabledStatus ?> value="<?= $i ?>" id="calender-day-<?= $i ?>" class="calender-day bg-s <?= "{$weekday} {$buttonClass}"; ?>">
-      <?= $i ?>
-    </button>
-
-  <?php endfor; ?>
-
-  <button id="button-submit-form" class="bg-emerald-600 col-span-2">Continue</button>
-  <button id="button-clear-selection" class="bg-rose-600 col-span-2">Clear selection</button>
+  </div>
 
 </div>
 
