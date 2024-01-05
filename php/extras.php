@@ -22,6 +22,11 @@ if ($roomChosen === 3) {
   for ($i = 0; $i < 3; $i++) {
     $extras[$i]["price"] = 0;
   }
+} else if ($roomChosen === 1) {
+  // economy room: 1 feature free
+  for ($i = 0; $i < 1; $i++) {
+    $extras[$i]["price"] = 0;
+  }
 }
 
 ?>
@@ -50,10 +55,15 @@ if ($roomChosen === 3) {
         <?php endforeach; ?>
 
         <li class="h-1 w-full bg-cyan-950 my-4"></li> <!-- separator -->
+        <li class="text-2xl font-extrabold mb-4">Order details:</li>
 
         <li>Chosen room: <span class="capitalize"><?php echo $roomChosen === 3 ? "Deluxe" : ($roomChosen === 2 ? "Standard" : "Economy") ?></span></li>
-        <li>Price per day: $<span id="price-per-day"><?php echo $_SESSION["pricePerDay"] ?></span></li>
-        <li>Complete your reservation in <span id="count-down">5:00</span></li>
+        <li>Arrival date: <?= $_SESSION["reservation"]["arrival_date"]; ?></li>
+        <li>Departure date: <?= $_SESSION["reservation"]["departure_date"]; ?></li>
+        <li>Number of days: <?= $_SESSION["numberOfDays"]; ?></li>
+
+        <li class="mb-4">Price per day: $<span id="price-per-day"><?php echo $_SESSION["pricePerDay"] ?></span></li>
+        <li class="font-extrabold">Complete your reservation in <span id="count-down">5:00</span></li>
       </ul>
       <input name="pageState" type="text" value="confirm" hidden>
     </form>

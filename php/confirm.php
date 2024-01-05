@@ -37,7 +37,8 @@ $_SESSION["reservation"]["total_cost"] = ($_SESSION["numberOfDays"] * $_SESSION[
       <ul class="text-sm lg:text-base font-bold leading-loose">
         <li class="text-2xl font-extrabold mb-4">Order details:</li>
         <li>Arrival date: <?= $_SESSION["reservation"]["arrival_date"]; ?></li>
-        <li class="mb-4">Departure date: <?= $_SESSION["reservation"]["departure_date"]; ?></li>
+        <li>Departure date: <?= $_SESSION["reservation"]["departure_date"]; ?></li>
+        <li class="mb-4">Number of days: <?= $_SESSION["numberOfDays"]; ?></li>
         <li>Type of room: <span class="capitalize"><?php echo $roomChosen === 3 ? "Deluxe" : ($roomChosen === 2 ? "Standard" : "Economy") ?></span></li>
         <li class="mb-4">Price per day: $<span id="price-per-day"><?php echo $_SESSION["pricePerDay"] ?></span></li>
 
@@ -47,7 +48,7 @@ $_SESSION["reservation"]["total_cost"] = ($_SESSION["numberOfDays"] * $_SESSION[
         <?php endforeach; ?>
 
       </ul>
-      <div class=" font-extrabold">Complete your reservation in <span id="count-down">5:00</span></div>
+      <div class="font-extrabold">Complete your reservation in <span id="count-down">5:00</span></div>
     </div>
 
     <div class="flex flex-col justify-between h-full mx-auto lg:ml-auto lg:mr-0 gap-16">

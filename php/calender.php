@@ -78,6 +78,9 @@ $statementGetExtras->execute();
 
 $extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
 
+// include first five items for advertising:
+$extrasForAdvertising = array_slice($extras, 0, 5);
+
 ?>
 
 
@@ -95,8 +98,8 @@ $extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
     <ul role="list" class="mt-6 space-y-3 text-sm leading-6 xl:mt-8">
 
       <?php $counter = 0;
-      foreach ($extras as $extraItem) :
-        if ($counter < 0) : ?>
+      foreach ($extrasForAdvertising as $extraItem) :
+        if ($counter < 1) : ?>
           <li class="flex gap-x-3 items-center">
             <!-- included: -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 fill-emerald-600 stroke-emerald-600">
@@ -129,7 +132,7 @@ $extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
     <ul role="list" class="mt-6 space-y-3 text-sm leading-6 xl:mt-8">
 
       <?php $counter = 0;
-      foreach ($extras as $extraItem) :
+      foreach ($extrasForAdvertising as $extraItem) :
         if ($counter < 3) : ?>
           <li class="flex gap-x-3 items-center">
             <!-- included: -->
@@ -163,7 +166,7 @@ $extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
     <ul role="list" class="mt-6 space-y-3 text-sm leading-6 xl:mt-8">
 
       <?php $counter = 0;
-      foreach ($extras as $extraItem) :
+      foreach ($extrasForAdvertising as $extraItem) :
         if ($counter < 5) : ?>
           <li class="flex gap-x-3 items-center">
             <!-- included: -->
@@ -189,6 +192,7 @@ $extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
 </form>
 
 
+<!-- calender container: -->
 <div id="calender" class="bg-cyan-50 p-4 lg:p-8 mx-auto grid max-w-md lg:max-w-3xl rounded-3xl shadow-cyan-50/25 shadow-xl">
 
   <h2 id="instruction-text" class="mb-8 text-center text-2xl font-extrabold leading-relaxed">Choose a start date</h2>
@@ -240,9 +244,10 @@ $extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
 
   </div>
 
+  <!-- info about chosen room and price, etc -->
   <div class="flex flex-col-reverse lg:flex-row justify-between items-start">
 
-    <ul class="text-sm lg:text-base mx-auto lg:mr-auto lg:ml-0 font-bold leading-loose"> <!-- underline underline-offset-8 decoration-4 -->
+    <ul class="text-sm lg:text-base mx-auto lg:mr-auto lg:ml-0 font-bold leading-loose">
       <li>Chosen room: <span class="capitalize"><?php echo $roomInfo["name"] ?></span></li>
       <li>Price per day: $<span id="price-per-day"><?php echo $roomInfo["base_price"] ?></span></li>
       <li class="text-2xl bg-cyan-950 text-cyan-50 p-2 my-2">Your total: $<span class="text-cyan-50" id="total-price">0</span></li>
