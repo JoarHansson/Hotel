@@ -6,8 +6,8 @@ require __DIR__ . "/autoload.php";
 
 ?>
 
-<h1>thanks for booking with us</h1>
+<h1 class="mb-16 text-center text-5xl font-extrabold font-sans italic leading-relaxed text-cyan-950 underline underline-offset-8 decoration-8">Thank you for choosing The Ice Hotel</h1>
 
-<form action="php/receipt.php" method="get" target="_blank">
-  <button type="submit" class="bg-emerald-500 px-4 py-2  hover:bg-emerald-400">get receipt</button>
+<form action="php/receipt.php" method="get" target="_blank" class="w-full text-center">
+  <button type="submit" class="button-cyan">Get receipt</button>
 </form>

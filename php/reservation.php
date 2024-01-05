@@ -35,7 +35,7 @@ if (isset($_POST["date-from"], $_POST["date-to"])) {
 
   // Check room availability
   if (array_intersect($requestedDates, $reservedDates)) {
-    $_SESSION["message"] = "one or more dates are already fully booked.";
+    $_SESSION["message"] = "Some of the chosen dates are not available.";
     $_SESSION["pageState"] = "error";
   } else {
 

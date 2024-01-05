@@ -51,7 +51,7 @@ if (isset($_POST["guest-name"], $_POST["transfer-code"])) {
     $statementSaveBookingInfo->bindParam(":room_id", $roomChosen, PDO::PARAM_INT);
     $statementSaveBookingInfo->execute();
 
-    $_SESSION["message"] = "payment succeeded";
+    $_SESSION["message"] = "Payment succeeded";
     $_SESSION["pageState"] = "success";
 
 
@@ -82,7 +82,7 @@ if (isset($_POST["guest-name"], $_POST["transfer-code"])) {
     $statementDeleteReservation->execute();
 
 
-    $_SESSION["message"] = "payment failed";
+    $_SESSION["message"] = "Payment failed";
     $_SESSION["pageState"] = "error";
   }
 }
