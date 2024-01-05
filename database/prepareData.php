@@ -77,14 +77,14 @@ $statementInsertIntoRooms->execute();
 $extras = [
   "Sushi buffet",
   "Extra blanket",
+  "Aurora guarantee",
   "Polar bear safari",
   "Penguin BBQ buffet",
   "Whisky on the rocks",
-  "Ice sculpting course",
   "Ice fishing excursion",
-  "Northern lights package",
-  "Siberian husky companion",
-  "Snowmobile (gas included)"
+  "Siberian husky company",
+  "Snowmobile (gas included)",
+  "Ice sculpting crash course"
 ];
 
 foreach ($extras as $item) {
