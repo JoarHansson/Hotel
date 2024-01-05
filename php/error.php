@@ -9,14 +9,14 @@ require __DIR__ . "/autoload.php";
 
   <h3 class="text-xl text-center font-extrabold leading-8 mb-8">ERROR: <?php echo $_SESSION["message"]; ?></h3>
 
-  <?php
-  unset($_SESSION["message"]);
-  unset($_SESSION["reservation"]);
-  ?>
-
   <form action="index.php" method="post" class="w-full text-center">
     <input name="pageState" type="text" value="home" hidden>
     <button type="submit" class="button-cyan">Back to homepage</button>
   </form>
 
 </div>
+
+<?php
+unset($_SESSION["message"]);
+unset($_SESSION["reservation"]);
+?>

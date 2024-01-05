@@ -24,7 +24,7 @@ foreach ($_SESSION["reservation"]["features"] as $feature) {
   $costChosenFeatures += $feature["cost"];
 }
 
-$_SESSION["reservation"]["total_cost"] = ($_SESSION["numberOfDays"] * $_SESSION["pricePerDay"]) + $costChosenFeatures;
+$_SESSION["reservation"]["total_cost"] = strval(($_SESSION["numberOfDays"] * $_SESSION["pricePerDay"]) + $costChosenFeatures);
 
 ?>
 
@@ -59,7 +59,7 @@ $_SESSION["reservation"]["total_cost"] = ($_SESSION["numberOfDays"] * $_SESSION[
       <form id="form-confirm" action="php/payment.php" method="post" class="flex flex-col text-base font-bold leading-loose">
         <label for="guest-name">Name of guest:</label>
         <input type="text" name="guest-name" placeholder="Enter your name" class="mb-4 w-full border-0 ring-1 ring-inset ring-gray-600 focus:ring-2 focus:ring-inset focus:ring-cyan-950 placeholder:text-gray-300">
-        <label for="transfer-code">Transfer code worth $<?= $_SESSION["reservation"]["total_cost"]; ?>:</label>
+        <label for="transfer-code">Transfer code of $<?= $_SESSION["reservation"]["total_cost"]; ?>:</label>
         <input type="text" name="transfer-code" placeholder="Enter your transfer code" class="w-full border-0 ring-1 ring-inset ring-gray-600 focus:ring-2 focus:ring-inset focus:ring-cyan-950 placeholder:text-gray-300">
       </form>
       <div class="flex flex-col justify-center mx-auto lg:ml-auto lg:mr-0 gap-4">
