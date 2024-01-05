@@ -38,7 +38,7 @@ if (isset($_POST["pageState"])) {
     require __DIR__ . "/php/home.php";
   }
 
-  // echo "<pre class='font-bold text-3xl mx-auto bg-cyan-50 p-8'>";
+  // echo "<pre class='font-bold text-xl mx-auto bg-cyan-50 p-8 mt-8'>";
   // echo "session:\n";
   // print_r($_SESSION);
   // echo "post:\n";

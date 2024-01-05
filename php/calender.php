@@ -84,9 +84,9 @@ $extrasForAdvertising = array_slice($extras, 0, 5);
 ?>
 
 
-<h1 class="mb-16 text-center text-5xl font-extrabold font-sans italic leading-relaxed text-cyan-950 underline underline-offset-8 decoration-8">The rooms</h1>
+<h1 class="mb-8 text-center text-5xl font-extrabold font-sans italic leading-relaxed text-cyan-950 underline underline-offset-8 decoration-8">The rooms</h1>
 
-<form action="index.php" method="post" class="mb-24 mx-auto grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+<form action="index.php" method="post" class="mb-16 mx-auto grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
 
   <!-- economy: -->
   <button name="roomType" type="submit" value="1" class=" bg-blue-950 rounded-3xl p-8 shadow-blue-950/25 shadow-xl hover:bg-blue-900 <?= ($roomChosen === 1) ? "ring-blue-400 ring-8" : "" ?>">

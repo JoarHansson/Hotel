@@ -28,7 +28,7 @@ $_SESSION["reservation"]["total_cost"] = strval(($_SESSION["numberOfDays"] * $_S
 
 ?>
 
-<h1 class="mb-16 text-center text-5xl font-extrabold font-sans italic leading-relaxed text-cyan-950 underline underline-offset-8 decoration-8">Confirm your booking</h1>
+<h1 class="mb-8 text-center text-5xl font-extrabold font-sans italic leading-relaxed text-cyan-950 underline underline-offset-8 decoration-8">Confirm your booking</h1>
 
 <div id="confirm-booking-container" class="bg-cyan-50 px-4 py-8 lg:p-8 mx-auto grid max-w-md lg:max-w-3xl rounded-3xl shadow-cyan-50/25 shadow-xl">
   <div class="flex flex-col lg:flex-row gap-8 justify-between items-stretch">

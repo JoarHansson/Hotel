@@ -31,11 +31,10 @@ if ($roomChosen === 3) {
 
 ?>
 
-<h1 class="mb-16 text-center text-5xl font-extrabold font-sans italic leading-relaxed text-cyan-950 underline underline-offset-8 decoration-8">Choose your extras</h1>
+<h1 class="mb-8 text-center text-5xl font-extrabold font-sans italic leading-relaxed text-cyan-950 underline underline-offset-8 decoration-8">Choose your extras</h1>
 
 <div id="choose-extras-container" class="bg-cyan-50 px-4 py-8 lg:p-8 mx-auto grid max-w-md lg:max-w-3xl rounded-3xl shadow-cyan-50/25 shadow-xl">
-  <!-- <h2 id="instruction-text" class="mb-8 text-center text-2xl font-extrabold leading-relaxed">Choose your extras</h2> -->
-  <div class="flex flex-col lg:flex-row gap-8 justify-between items-end">
+  <div class="flex flex-col lg:flex-row gap-8 justify-between items-stretch">
     <!-- The form is submitted in extras.js if #button-submit-extras is clicked -->
     <form id="form-extras" class="mx-auto lg:mr-auto lg:ml-0" action="index.php" method="post">
       <ul class="text-sm lg:text-base font-bold leading-loose">

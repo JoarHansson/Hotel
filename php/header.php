@@ -15,7 +15,7 @@
 <body class="relative bg-cyan-50 min-h-screen">
   <div class="absolute top-0 bottom-0 left-0 right-0 bg-[url('/assets/ice.jpg')] bg-center bg-fixed bg-auto opacity-50 -z-10"></div>
 
-  <header class="w-full bg-cyan-300 p-4 mb-32 ">
+  <header class="w-full bg-cyan-300 p-4 mb-16 ">
     <form action="index.php" method="post" class="flex justify-between items-center">
       <button type="submit" class="text-4xl font-display italic uppercase text-cyan-950" name="pageState" value="home">The Ice Hotel</button>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
