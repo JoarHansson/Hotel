@@ -69,19 +69,22 @@ foreach ($tables as $table) {
 // Insert into rooms
 $statementInsertIntoRooms = $db->prepare(
   "INSERT INTO rooms (name, base_price)
-  VALUES ('economy', 5), ('standard', 7), ('deluxe', 10)"
+  VALUES ('economy', 3), ('standard', 5), ('deluxe', 7)"
 );
 $statementInsertIntoRooms->execute();
 
 // Insert into extras
 $extras = [
-  "stuff",
-  "things",
-  "extra stuff",
-  "more things",
-  "fun expensive thing",
-  "extra everything package",
-  "even more things"
+  "Sushi buffet",
+  "Extra blanket",
+  "Polar bear safari",
+  "Penguin BBQ buffet",
+  "Whisky on the rocks",
+  "Ice sculpting course",
+  "Ice fishing excursion",
+  "Northern lights package",
+  "Siberian husky companion",
+  "Snowmobile (gas included)"
 ];
 
 foreach ($extras as $item) {
@@ -90,7 +93,7 @@ foreach ($extras as $item) {
     VALUES (:item, :price)"
   );
 
-  $price = rand(1, 3); // might change later..
+  $price = rand(1, 2); // might change later..
 
   $statementInsertIntoExtras->bindParam(":item", $item, PDO::PARAM_STR);
   $statementInsertIntoExtras->bindParam(":price", $price, PDO::PARAM_INT);
