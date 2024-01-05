@@ -1,9 +1,11 @@
-WHY NOT A GIF HERE? TO SET THE MOOD.
+![The Ice Hotel on Mount Frost](/assets/the-ice-hotel-mount-frost-jpg)
 
 # Mount Frost
+
 Escape to the enchanting realm of Mount Frost, a pristine jewel cradled in the embrace of the icy seas. From snow-covered peaks to the shimmering auroras that dance across the night sky, Mount Frost offers a breathtaking escape into the heart of winter's embrace.
 
 # The Ice Hotel
+
 Welcome to The Ice Hotel, the crown jewel of Mount Frost. Situated on the heights of this winter paradise, the hotel is a testament to the harmonious blend of luxury and the ethereal beauty of the Arctic landscape.
 
 # Instructions
