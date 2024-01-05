@@ -38,13 +38,13 @@ if ($roomChosen === 3) {
         <?php foreach ($extras as $key => $extraItem) : ?>
           <?php if ($extraItem["price"] === 0) : ?>
             <li>
-              <input checked type="checkbox" name="extra-<?php echo $key ?>" value="<?php echo $extraItem["name"] . "_$" . $extraItem["price"] ?>" class="extra-items">
-              <label for="extra-<?php echo $key ?>"><?php echo $extraItem["name"] . ": $" . $extraItem["price"] ?></label>
+              <input checked type="checkbox" name="extra-<?php echo $key ?>" value="<?php echo $extraItem["name"] . "_$" . $extraItem["price"] ?>" class="extra-items rounded border-gray-300 text-cyan-950 focus:ring-cyan-950">
+              <label for="extra-<?php echo $key ?>" class=" pl-1 "><?php echo $extraItem["name"] . ": $" . $extraItem["price"] ?></label>
             </li>
           <?php else : ?>
             <li>
-              <input type="checkbox" name="extra-<?php echo $key ?>" value="<?php echo $extraItem["name"] . "_$" . $extraItem["price"] ?>" class="extra-items">
-              <label for="extra-<?php echo $key ?>"><?php echo $extraItem["name"] . ": $" . $extraItem["price"] ?></label>
+              <input type="checkbox" name="extra-<?php echo $key ?>" value="<?php echo $extraItem["name"] . "_$" . $extraItem["price"] ?>" class="extra-items rounded border-gray-300 text-cyan-950 focus:ring-cyan-950">
+              <label for="extra-<?php echo $key ?>" class=" pl-1 "><?php echo $extraItem["name"] . ": $" . $extraItem["price"] ?></label>
             </li>
           <?php endif; ?>
         <?php endforeach; ?>
@@ -71,9 +71,9 @@ if ($roomChosen === 3) {
   </div>
 </div>
 
-<!-- The hidden form is submitted in countdown.js if the timer runs out,
-or in extras.js if #button-cancel-booking is pressed -->
-<form action="index.php" method="post" id="form-cancel-booking" class="m-4" hidden>
+<!-- The hidden form is submitted in cancelBooking.js if the timer runs out,
+or if #button-cancel-booking is pressed -->
+<form action="index.php" method="post" id="form-cancel-booking" hidden>
   <input name="pageState" type="text" value="home" hidden>
 </form>
 
