@@ -220,8 +220,16 @@ $extrasForAdvertising = array_slice($extras, 0, 5);
       $isBooked = in_array($i, $bookedDates);
 
 
-      $buttonClass = $isBooked ? "bg-cyan-950 cursor-not-allowed"
-        : ($isReserved  ? "bg-cyan-800 cursor-not-allowed" : "bg-cyan-600");
+      if ($roomChosen === 1) {
+        $buttonClass = $isBooked ? "bg-blue-950 cursor-not-allowed"
+          : ($isReserved  ? "bg-blue-800 cursor-not-allowed" : "bg-blue-600");
+      } else if ($roomChosen === 2) {
+        $buttonClass = $isBooked ? "bg-purple-950 cursor-not-allowed"
+          : ($isReserved  ? "bg-purple-800 cursor-not-allowed" : "bg-purple-600");
+      } else if ($roomChosen === 3) {
+        $buttonClass = $isBooked ? "bg-yellow-950 cursor-not-allowed"
+          : ($isReserved  ? "bg-yellow-800 cursor-not-allowed" : "bg-yellow-600");
+      }
 
       $disabledStatus = $isReserved ? "disabled" : "";
 
@@ -248,19 +256,21 @@ $extrasForAdvertising = array_slice($extras, 0, 5);
   <div class="flex flex-col-reverse lg:flex-row justify-between items-start">
 
     <ul class="text-sm lg:text-base mx-auto lg:mr-auto lg:ml-0 font-bold leading-loose">
-      <li>Chosen room: <span class="capitalize"><?php echo $roomInfo["name"] ?></span></li>
+      <li class="text-2xl font-extrabold mb-4">Chosen room: <span class="capitalize"><?php echo $roomInfo["name"] ?></span></li>
       <li>Price per day: $<span id="price-per-day"><?php echo $roomInfo["base_price"] ?></span></li>
-      <li class="text-2xl bg-cyan-950 text-cyan-50 p-2 my-2">Your total: $<span class="text-cyan-50" id="total-price">0</span></li>
+      <li>Arrival date: <span id="arrival-date"></span></li>
+      <li>Departure date: <span id="departure-date"></span></li>
+      <li class="text-2xl bg-cyan-950 text-cyan-50 p-2 my-4">Your total: $<span class="text-cyan-50" id="total-price">0</span></li>
       <li class="flex items-center gap-2">
-        <span class="w-4 h-4 bg-cyan-600"></span>
+        <span class="w-4 h-4 <?= $roomChosen === 1 ? "bg-blue-600" : ($roomChosen === 2 ? "bg-purple-600" : "bg-yellow-600") ?>"></span>
         <span>- Available</span>
       </li>
       <li class="flex items-center gap-2">
-        <span class="w-4 h-4 bg-cyan-800"></span>
+        <span class="w-4 h-4 <?= $roomChosen === 1 ? "bg-blue-800" : ($roomChosen === 2 ? "bg-purple-800" : "bg-yellow-800") ?>"></span>
         <span>- Reserved (check back soon)</span>
       </li>
       <li class="flex items-center gap-2">
-        <span class="w-4 h-4 bg-cyan-950"></span>
+        <span class="w-4 h-4 <?= $roomChosen === 1 ? "bg-blue-950" : ($roomChosen === 2 ? "bg-purple-950" : "bg-yellow-950") ?>">"></span>
         <span>- Already booked</span>
       </li>
     </ul>
