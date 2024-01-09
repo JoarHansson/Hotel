@@ -94,6 +94,13 @@ $reservationsUpdated = getDataFromDb("reservations", $roomChosen);
 $reservedDatesUpdated = filterDatesFromData($reservationsUpdated);
 /* code from calender.php ends here */
 
+
+// get info on all rooms:
+$statementGetInfoAllRooms = $db->prepare("SELECT * FROM rooms");
+$statementGetInfoAllRooms->execute();
+$roomInfoAllRooms = $statementGetInfoAllRooms->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
 
 <div class="mx-auto pb-16 px-4 sm:px-6 lg:px-8">
@@ -168,35 +175,18 @@ $reservedDatesUpdated = filterDatesFromData($reservationsUpdated);
     <!-- Forms to update room prices: -->
     <h2 class="mb-8 text-center text-2xl font-extrabold leading-relaxed">Room prices</h2>
 
-    <form action="admin.php" method="post" class="flex flex-col text-base font-bold leading-loose mb-8">
-      <div>Room name: X</div>
-      <div>Current price: Y</div>
-      <label for="new-price">New price for X:</label>
-      <div class="flex items-center gap-4">
-        <input type="number" name="new-price" placeholder="X" class="w-32 border-0 ring-1 ring-inset ring-gray-600 focus:ring-2 focus:ring-inset focus:ring-cyan-950 placeholder:text-gray-300">
-        <button type="submit" class="button-cyan">Update</button>
-      </div>
-    </form>
-
-    <form action="admin.php" method="post" class="flex flex-col text-base font-bold leading-loose mb-8">
-      <div>Room name: X</div>
-      <div>Current price: Y</div>
-      <label for="new-price">New price for X:</label>
-      <div class="flex items-center gap-4">
-        <input type="number" name="new-price" placeholder="X" class="w-32 border-0 ring-1 ring-inset ring-gray-600 focus:ring-2 focus:ring-inset focus:ring-cyan-950 placeholder:text-gray-300">
-        <button type="submit" class="button-cyan">Update</button>
-      </div>
-    </form>
-
-    <form action="admin.php" method="post" class="flex flex-col text-base font-bold leading-loose mb-8">
-      <div>Room name: X</div>
-      <div>Current price: Y</div>
-      <label for="new-price">New price for X:</label>
-      <div class="flex items-center gap-4 justify-start">
-        <input type="number" name="new-price" placeholder="X" class="w-32 border-0 ring-1 ring-inset ring-gray-600 focus:ring-2 focus:ring-inset focus:ring-cyan-950 placeholder:text-gray-300">
-        <button type="submit" class="button-cyan">Update</button>
-      </div>
-    </form>
+    <?php foreach ($roomInfoAllRooms as $roomInfoEachRoom) : ?>
+      <form action="php/updatePrices.php" method="post" class="flex flex-col text-base font-bold leading-loose mb-8">
+        <div class="font-extrabold">Room name: <?= $roomInfoEachRoom["name"]; ?></div>
+        <div>Current price: $<?= $roomInfoEachRoom["base_price"]; ?></div>
+        <label for="newPrice">New price for <?= $roomInfoEachRoom["name"]; ?> room:</label>
+        <div class="flex items-center gap-4">
+          <input type="number" name="newPrice" placeholder="X" class="w-32 border-0 ring-1 ring-inset ring-gray-600 focus:ring-2 focus:ring-inset focus:ring-cyan-950 placeholder:text-gray-300">
+          <input type="number" name="roomId" value="<?= $roomInfoEachRoom["id"]; ?>" hidden>
+          <button type="submit" class="button-cyan">Update</button>
+        </div>
+      </form>
+    <?php endforeach; ?>
 
     <div class="h-1 w-full bg-cyan-950 mt-4 mb-8"></div> <!-- separator -->
 
