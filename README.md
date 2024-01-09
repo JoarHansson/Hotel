@@ -1,4 +1,4 @@
-![The Ice Hotel on Mount Frost](/assets/the-ice-hotel-mount-frost-jpg)
+![The Ice Hotel on Mount Frost](/assets/the-ice-hotel-mount-frost.jpg)
 
 # Mount Frost
 
