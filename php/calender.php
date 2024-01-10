@@ -31,6 +31,7 @@ $statementGetRoomInfo->bindParam(":id", $roomChosen, PDO::PARAM_INT);
 $statementGetRoomInfo->execute();
 $roomInfo = $statementGetRoomInfo->fetch(PDO::FETCH_ASSOC);
 
+$_SESSION["pricePerDay"] = $roomInfo["base_price"];
 
 // Get data from table reservations
 $reservations = getDataFromDb("reservations", $roomChosen);
@@ -55,12 +56,12 @@ $filteredReservations = array_filter($reservations, function ($r) use ($bookedDa
 
 
 $timeOfPageLoad = time();
-$tenMinutesAgo =  $timeOfPageLoad - 600; // a reservation is hold for 10 minutes
+$tenMinutesAgo = $timeOfPageLoad - 600; // a reservation is hold for 10 minutes
 
 // delete old reservations that don't have a matching booking
 foreach ($filteredReservations as $filteredItem) {
   $statementDeleteOldReservations = $db->prepare(
-    "DELETE FROM reservations WHERE timestamp < :tenMinutesAgo AND id = :id"
+    "DELETE FROM reservations WHERE timestamp < :tenMinutesAgo AND id=:id"
   );
   $statementDeleteOldReservations->bindParam(":tenMinutesAgo", $tenMinutesAgo, PDO::PARAM_INT);
   $statementDeleteOldReservations->bindParam(":id", $filteredItem["id"], PDO::PARAM_INT);
@@ -288,8 +289,6 @@ $extrasForAdvertising = array_slice($extras, 0, 5);
 <form action="php/reservation.php" method="post" id="form-make-reservation" class="hidden">
   <input name="date-from" id="date-from" type="date" min="2024-01-01" max="2024-01-31">
   <input name="date-to" id="date-to" type="date" min="2024-01-01" max="2024-01-31">
-
-  <input name="pricePerDay" type="text" value="<?php echo $roomInfo["base_price"]  ?>">
 </form>
 
 <script src="/js/calender.js"></script>
