@@ -57,6 +57,10 @@ $_SESSION["reservation"]["additional_info"]["precipitation"] = $precipitation;
 $_SESSION["reservation"]["additional_info"]["wind_speed"] = $windSpeed;
 $_SESSION["reservation"]["additional_info"]["weather_api"] = "https://open-meteo.com/en/docs/metno-api/";
 
+// remove id of features for the receipt
+for ($i = 0; $i < count($_SESSION["reservation"]["features"]); $i++) {
+  unset($_SESSION["reservation"]["features"][$i]["id"]);
+}
 ?>
 
 <h1 class="mb-8 mt-32 lg:mt-64 text-center text-5xl font-extrabold font-sans italic leading-relaxed text-cyan-950 underline underline-offset-8 decoration-8">Thank you for choosing The Ice Hotel</h1>

@@ -48,7 +48,8 @@ $chosenExtrasWithPrices = array_filter($extras, function ($item) use ($chosenExt
   if (in_array($item["name"], $chosenExtras)) {
     $_SESSION["reservation"]["features"][] = [
       "name" => $item["name"],
-      "cost" => $item["price"]
+      "cost" => $item["price"],
+      "id" => $item["id"]
     ];
     return true;
   }

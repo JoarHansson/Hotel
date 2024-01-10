@@ -51,9 +51,35 @@ if (isset($_POST["guest-name"], $_POST["transfer-code"])) {
     $statementSaveBookingInfo->bindParam(":room_id", $roomChosen, PDO::PARAM_INT);
     $statementSaveBookingInfo->execute();
 
-    $_SESSION["message"] = "Payment succeeded";
-    $_SESSION["pageState"] = "success";
+    // get booking id:
+    $statementGetBookingId = $db->prepare(
+      "SELECT id FROM bookings
+      WHERE checkin_date = :reservedDateFrom AND
+      checkout_date = :reservedDateTo AND
+      guest_name = :guestName"
+    );
+    $statementGetBookingId->bindParam(":reservedDateFrom", $reservedDateFrom, PDO::PARAM_INT);
+    $statementGetBookingId->bindParam(":reservedDateTo", $reservedDateTo, PDO::PARAM_INT);
+    $statementGetBookingId->bindParam(":guestName", $guestName, PDO::PARAM_STR);
+    $statementGetBookingId->execute();
 
+    $bookingId = $statementGetBookingId->fetch(PDO::FETCH_ASSOC);
+
+    print_r($bookingId);
+    echo "<pre>";
+    print_r($_SESSION["reservation"]["features"]);
+
+    // save the extras info for the booking (insert into bookings_extras table):
+    foreach ($_SESSION["reservation"]["features"] as $feature) {
+      $statementSaveExtrasInfo = $db->prepare(
+        "INSERT INTO bookings_extras (bookings_id, extras_id)
+        VALUES (:bookingId, :extrasId)"
+      );
+
+      $statementSaveExtrasInfo->bindParam(":bookingId", $bookingId, PDO::PARAM_INT);
+      $statementSaveExtrasInfo->bindParam(":extrasId", $feature["id"], PDO::PARAM_INT);
+      $statementSaveExtrasInfo->execute();
+    }
 
     // deposit the tc to my account
     try {
@@ -66,6 +92,9 @@ if (isset($_POST["guest-name"], $_POST["transfer-code"])) {
     } catch (ClientException $e) {
       echo $e->getMessage();
     }
+
+    $_SESSION["message"] = "Payment succeeded";
+    $_SESSION["pageState"] = "success";
   } else {
 
     // if transfer code isn't valid, clear the reservation from db
