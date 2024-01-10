@@ -194,70 +194,57 @@ $extrasForAdvertising = array_slice($extras, 0, 5);
 
 
 <!-- calender container: -->
-<div id="calender" class="bg-cyan-50 p-4 lg:p-8 mx-auto grid max-w-md lg:max-w-3xl rounded-3xl shadow-cyan-50/25 shadow-xl">
-
-  <h2 id="instruction-text" class="mb-8 text-center text-2xl font-extrabold leading-relaxed">Choose a start date</h2>
-
-  <div class="mb-8 mx-auto grid gap-1 grid-cols-7 w-full">
-
-    <div class="text-center text-base font-bold">Mon</div>
-    <div class="text-center text-base font-bold">Tue</div>
-    <div class="text-center text-base font-bold">Wed</div>
-    <div class="text-center text-base font-bold">Thu</div>
-    <div class="text-center text-base font-bold">Fri</div>
-    <div class="text-center text-base font-bold">Sat</div>
-    <div class="text-center text-base font-bold">Sun</div>
-
-    <?php
-
-    // Create month with 31 days and week starting on the 1st (Jan 2024)
-    // The counter helps to assign the correct weekday to each date
-
-    $counter = 0;
-
-    for ($i = 1; $i < 32; $i++) :
-
-      $isReserved = in_array($i, $reservedDatesUpdated);
-      $isBooked = in_array($i, $bookedDates);
+<div id="calender" class="bg-cyan-50 p-4 lg:p-8 mx-auto flex flex-col lg:flex-row justify-between gap-10 lg:gap-20 max-w-md lg:max-w-5xl rounded-3xl shadow-cyan-50/25 shadow-xl">
 
 
-      if ($roomChosen === 1) {
-        $buttonClass = $isBooked ? "bg-blue-950 cursor-not-allowed"
-          : ($isReserved  ? "bg-blue-800 cursor-not-allowed" : "bg-blue-600");
-      } else if ($roomChosen === 2) {
-        $buttonClass = $isBooked ? "bg-purple-950 cursor-not-allowed"
-          : ($isReserved  ? "bg-purple-800 cursor-not-allowed" : "bg-purple-600");
-      } else if ($roomChosen === 3) {
-        $buttonClass = $isBooked ? "bg-yellow-950 cursor-not-allowed"
-          : ($isReserved  ? "bg-yellow-800 cursor-not-allowed" : "bg-yellow-600");
-      }
-
-      $disabledStatus = $isReserved ? "disabled" : "";
-
-      $weekday;
-
-      if (isset($week[$counter])) {
-        $weekday = $week[$counter];
-      } else {
-        $weekday = "Monday";
-        $counter = 0;
-      }
-
-      $counter++; ?>
-
-      <button <?= $disabledStatus ?> value="<?= $i ?>" id="calender-day-<?= $i ?>" class="calender-day py-4 text-base font-bold rounded-sm text-cyan-50 <?= "{$weekday} {$buttonClass}"; ?>">
-        <?= $i ?>
-      </button>
-
-    <?php endfor; ?>
-
+  <div class="w-full">
+    <h2 id="instruction-text" class="mb-8 text-center text-2xl font-extrabold leading-relaxed">Choose a start date</h2>
+    <div class="mb-8 mx-auto grid gap-1 grid-cols-7 w-full">
+      <div class="text-center text-base font-bold">Mon</div>
+      <div class="text-center text-base font-bold">Tue</div>
+      <div class="text-center text-base font-bold">Wed</div>
+      <div class="text-center text-base font-bold">Thu</div>
+      <div class="text-center text-base font-bold">Fri</div>
+      <div class="text-center text-base font-bold">Sat</div>
+      <div class="text-center text-base font-bold">Sun</div>
+      <?php
+      // Create month with 31 days and week starting on the 1st (Jan 2024)
+      // The counter helps to assign the correct weekday to each date
+      $counter = 0;
+      for ($i = 1; $i < 32; $i++) :
+        $isReserved = in_array($i, $reservedDatesUpdated);
+        $isBooked = in_array($i, $bookedDates);
+        if ($roomChosen === 1) {
+          $buttonClass = $isBooked ? "bg-blue-950 cursor-not-allowed"
+            : ($isReserved  ? "bg-blue-800 cursor-not-allowed" : "bg-blue-600");
+        } else if ($roomChosen === 2) {
+          $buttonClass = $isBooked ? "bg-purple-950 cursor-not-allowed"
+            : ($isReserved  ? "bg-purple-800 cursor-not-allowed" : "bg-purple-600");
+        } else if ($roomChosen === 3) {
+          $buttonClass = $isBooked ? "bg-yellow-950 cursor-not-allowed"
+            : ($isReserved  ? "bg-yellow-800 cursor-not-allowed" : "bg-yellow-600");
+        }
+        $disabledStatus = $isReserved ? "disabled" : "";
+        $weekday;
+        if (isset($week[$counter])) {
+          $weekday = $week[$counter];
+        } else {
+          $weekday = "Monday";
+          $counter = 0;
+        }
+        $counter++; ?>
+        <button <?= $disabledStatus ?> value="<?= $i ?>" id="calender-day-<?= $i ?>" class="calender-day py-4 text-base font-bold rounded-sm text-cyan-50 <?= "{$weekday} {$buttonClass}"; ?>">
+          <?= $i ?>
+        </button>
+      <?php endfor; ?>
+    </div>
   </div>
 
   <!-- info about chosen room and price, etc -->
-  <div class="flex flex-col-reverse lg:flex-row justify-between items-start">
+  <div class="flex flex-col gap-16 justify-between items-center mx-auto lg:items-end w-max">
 
-    <ul class="text-sm lg:text-base mx-auto lg:mr-auto lg:ml-0 font-bold leading-loose">
-      <li class="text-2xl font-extrabold mb-4">Chosen room: <span class="capitalize"><?php echo $roomInfo["name"] ?></span></li>
+    <ul class="text-sm lg:text-base font-bold leading-loose">
+      <li class="text-2xl font-extrabold mb-4  w-max">Chosen room: <span class="capitalize"><?php echo $roomInfo["name"] ?></span></li>
       <li>Price per day: $<span id="price-per-day"><?php echo $roomInfo["base_price"] ?></span></li>
       <li>Arrival date: <span id="arrival-date"></span></li>
       <li>Departure date: <span id="departure-date"></span></li>
@@ -276,7 +263,7 @@ $extrasForAdvertising = array_slice($extras, 0, 5);
       </li>
     </ul>
 
-    <div class="flex flex-col justify-center mx-auto lg:ml-auto lg:mr-0 gap-4 mb-8">
+    <div class="flex flex-col justify-center gap-4 mb-8 lg:mb-0 mx-auto">
       <button id="button-submit-form" class="button-green">Continue</button>
       <button id="button-clear-selection" class="button-red">Clear selection</button>
     </div>
