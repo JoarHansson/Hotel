@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require __DIR__ . "/php/autoload.php";
 require __DIR__ . "/php/header.php";
-require(__DIR__ . '/vendor/autoload.php');
+require __DIR__ . "/vendor/autoload.php";
 
 use Dotenv\Dotenv;
 
@@ -100,6 +100,26 @@ $statementGetInfoAllRooms = $db->prepare("SELECT * FROM rooms");
 $statementGetInfoAllRooms->execute();
 $roomInfoAllRooms = $statementGetInfoAllRooms->fetchAll(PDO::FETCH_ASSOC);
 
+// get my account balance from the central bank
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+
+$client = new Client();
+$baseUri = "https://www.yrgopelag.se/centralbank/";
+
+
+try {
+  $responseCheckAccountBalance = $client->request("POST", $baseUri . "accountInfo", [
+    "form_params" => [
+      "user" => "Joar",
+      "api_key" => $_ENV["API_KEY"]
+    ]
+  ]);
+} catch (ClientException $e) {
+  echo $e->getMessage();
+}
+
+$accountBalance = json_decode($responseCheckAccountBalance->getBody()->getContents());
 
 ?>
 
@@ -192,7 +212,7 @@ $roomInfoAllRooms = $statementGetInfoAllRooms->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="flex flex-col lg:flex-row gap-8 justify-between ">
       <div class="text-center font-bold  text-2xl bg-cyan-950 text-cyan-50 px-4 py-2">
-        Account balance: $<span class="text-cyan-50" id="total-price">000</span>
+        Account balance: $<span class="text-cyan-50" id="total-price"><?php echo $accountBalance->credit ?></span>
       </div>
 
       <form id="form-logout" action="/login.php" method="post" class="text-base font-bold leading-loose bg-cyan-50 mx-auto lg:mr-0 lg:ml-auto max-w-md rounded-3xl shadow-cyan-50/25 shadow-xl">
@@ -205,6 +225,7 @@ $roomInfoAllRooms = $statementGetInfoAllRooms->fetchAll(PDO::FETCH_ASSOC);
   <?php
 
   // echo "<pre class='font-bold text-xl mx-auto bg-cyan-50 p-8 mt-8'>";
+  // var_dump($accountBalance);
   // echo "session:\n";
   // print_r($_SESSION);
   // echo "post:\n";
