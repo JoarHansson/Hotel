@@ -25,18 +25,6 @@ unset($_SESSION["loggedIn"]);
     <?php endif; ?>
   </form>
 
-
-  <?php
-
-  // echo "<pre class='font-bold text-xl mx-auto bg-cyan-50 p-8 mt-8'>";
-  // echo "session:\n";
-  // print_r($_SESSION);
-  // echo "post:\n";
-  // print_r($_POST);
-  // echo "</pre>";
-
-  ?>
-
 </div>
 </body>
 
