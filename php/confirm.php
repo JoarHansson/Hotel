@@ -6,18 +6,53 @@ require __DIR__ . "/autoload.php";
 
 $_SESSION["reservation"]["features"] = []; // clear features just in case
 
+$roomChosen = $_SESSION["roomType"];
+
+// get all extra items from db
+$statementGetExtras = $db->prepare("SELECT * FROM extras");
+$statementGetExtras->execute();
+
+$extras = $statementGetExtras->fetchAll(PDO::FETCH_ASSOC);
+
+// apply discounts based on room choice
+if ($roomChosen === 3) {
+  // deluxe room: 5 features free
+  for ($i = 0; $i < 5; $i++) {
+    $extras[$i]["price"] = 0;
+  }
+} else if ($roomChosen === 2) {
+  // standard room: 3 features free
+  for ($i = 0; $i < 3; $i++) {
+    $extras[$i]["price"] = 0;
+  }
+} else if ($roomChosen === 1) {
+  // economy room: 1 feature free
+  for ($i = 0; $i < 1; $i++) {
+    $extras[$i]["price"] = 0;
+  }
+}
+
+// get chosen items from extras.php:
 if (isset($_POST)) {
   foreach ($_POST as $key => $extraItem) {
     $item = htmlspecialchars($extraItem);
 
     if (str_contains($key, "extra")) {
-      $itemExploded = explode("_$", $item);
-      $itemAssoc = ["name" => $itemExploded[0], "cost" => $itemExploded[1]];
-
-      $_SESSION["reservation"]["features"][] = $itemAssoc;
+      $chosenExtras[] = $item;
     }
   }
 }
+
+// filter out chosen items with correct pricing
+$chosenExtrasWithPrices = array_filter($extras, function ($item) use ($chosenExtras) {
+  if (in_array($item["name"], $chosenExtras)) {
+    $_SESSION["reservation"]["features"][] = [
+      "name" => $item["name"],
+      "cost" => $item["price"]
+    ];
+    return true;
+  }
+});
 
 $costChosenFeatures = 0;
 foreach ($_SESSION["reservation"]["features"] as $feature) {
@@ -58,7 +93,7 @@ $_SESSION["reservation"]["total_cost"] = strval(($_SESSION["numberOfDays"] * $_S
       <!-- The form is submitted in confirm.js if #button-submit-confirm is clicked -->
       <form id="form-confirm" action="php/payment.php" method="post" class="flex flex-col text-base font-bold leading-loose">
         <label for="guest-name">Name of guest:</label>
-        <input type="text" name="guest-name" placeholder="Enter your name" class="mb-4 w-full border-0 ring-1 ring-inset ring-gray-600 focus:ring-2 focus:ring-inset focus:ring-cyan-950 placeholder:text-gray-300">
+        <input type="password" name="guest-name" placeholder="Enter your name" class="mb-4 w-full border-0 ring-1 ring-inset ring-gray-600 focus:ring-2 focus:ring-inset focus:ring-cyan-950 placeholder:text-gray-300">
         <label for="transfer-code">Transfer code of $<?= $_SESSION["reservation"]["total_cost"]; ?>:</label>
         <input type="text" name="transfer-code" placeholder="Enter your transfer code" class="w-full border-0 ring-1 ring-inset ring-gray-600 focus:ring-2 focus:ring-inset focus:ring-cyan-950 placeholder:text-gray-300">
       </form>

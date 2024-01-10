@@ -42,12 +42,12 @@ if ($roomChosen === 3) {
         <?php foreach ($extras as $key => $extraItem) : ?>
           <?php if ($extraItem["price"] === 0) : ?>
             <li>
-              <input checked type="checkbox" name="extra-<?php echo $key ?>" value="<?php echo $extraItem["name"] . "_$" . $extraItem["price"] ?>" class="extra-items rounded border-gray-300 text-cyan-950 focus:ring-cyan-950">
+              <input checked type="checkbox" name="extra-<?php echo $key ?>" value="<?php echo $extraItem["name"] ?>" class="cost-<?php echo $extraItem["price"] ?> extra-items rounded border-gray-300 text-cyan-950 focus:ring-cyan-950">
               <label for="extra-<?php echo $key ?>" class=" pl-1 "><?php echo $extraItem["name"] . ": $" . $extraItem["price"] ?></label>
             </li>
           <?php else : ?>
             <li>
-              <input type="checkbox" name="extra-<?php echo $key ?>" value="<?php echo $extraItem["name"] . "_$" . $extraItem["price"] ?>" class="extra-items rounded border-gray-300 text-cyan-950 focus:ring-cyan-950">
+              <input type="checkbox" name="extra-<?php echo $key ?>" value="<?php echo  $extraItem["name"] ?>" class="cost-<?php echo $extraItem["price"] ?> extra-items rounded border-gray-300 text-cyan-950 focus:ring-cyan-950">
               <label for="extra-<?php echo $key ?>" class=" pl-1 "><?php echo $extraItem["name"] . ": $" . $extraItem["price"] ?></label>
             </li>
           <?php endif; ?>

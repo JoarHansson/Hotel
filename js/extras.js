@@ -7,14 +7,16 @@ const buttonSubmitExtras = document.querySelector("#button-submit-extras");
 // update total price shown, based on which checkboxes are checked
 extraItems.forEach((item) => {
   item.addEventListener("click", (event) => {
+    let cost;
+    event.target.classList.forEach((className) => {
+      if (className.includes("cost")) {
+        cost = className.substr(-1, 1); // last character in string is the price
+      }
+    });
     if (event.target.checked === true) {
-      totalPrice.textContent =
-        Number(totalPrice.textContent) +
-        Number(event.target.value.substr(-1, 1)); // last character in string is always the price
+      totalPrice.textContent = Number(totalPrice.textContent) + Number(cost);
     } else if (event.target.checked === false) {
-      totalPrice.textContent =
-        Number(totalPrice.textContent) -
-        Number(event.target.value.substr(-1, 1));
+      totalPrice.textContent = Number(totalPrice.textContent) - Number(cost);
     }
   });
 });
