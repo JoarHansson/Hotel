@@ -13,7 +13,7 @@ This file won't be included when the site is deployed.
 
 */
 
-// $statementsDropTable = $db->prepare("DROP TABLE occupancy");
+// $statementsDropTable = $db->prepare("DROP TABLE bookings_extras");
 // $statementsDropTable->execute();
 
 // create all tables
@@ -45,7 +45,7 @@ $statementsCreateTables = [
     price INTEGER
   )",
   "CREATE TABLE IF NOT EXISTS bookings_extras (
-    id INTEGER,
+    id INTEGER PRIMARY KEY,
     bookings_id INTEGER,
     extras_id INTEGER,
     FOREIGN KEY (bookings_id) REFERENCES bookings(id),
