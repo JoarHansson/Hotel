@@ -14,15 +14,17 @@ The hotel qualifies for a star rating (1-5) based on the following criteria:
 - The hotel can use external data when producing successful booking responses.
 - The hotel has an admin page where for example room prices could be changed.
 
-### Mount Frost
+Visit the site [here](https://php-fanclub.se/the-ice-hotel/)
+
+## Mount Frost
 
 A frozen mountain in the sea (see image above).
 
-### The Ice Hotel - ⭐⭐⭐⭐⭐
+## The Ice Hotel
 
 Welcome to The Ice Hotel, the crown jewel of Mount Frost: A hotel completely carved out of ice.
 
-Visit the site [here](https://php-fanclub.se/the-ice-hotel/)
+Star rating  - ⭐⭐⭐⭐⭐
 
 # Instructions
 
@@ -33,9 +35,9 @@ Visit the site [here](https://php-fanclub.se/the-ice-hotel/)
 
 ### To generate files which are not included (see .gitignore), run the following commands:
 
-- composer install
-- npm i
-- npm run build
+- `composer install`
+- `npm i`
+- `npm run build`
 
 ### To make a successful booking without a transfer code, for testing:
 
