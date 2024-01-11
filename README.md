@@ -1,12 +1,26 @@
-![The Ice Hotel on Mount Frost](/assets/the-ice-hotel-mount-frost.jpg)
-
-# Mount Frost
-
-Escape to the enchanting realm of Mount Frost, a pristine jewel cradled in the embrace of the icy seas. From snow-covered peaks to the shimmering auroras that dance across the night sky, Mount Frost offers a breathtaking escape into the heart of winter's embrace.
+![The Ice Hotel on Mount Frost](/assets/the-ice-hotel-mount-frost.jpg "Photograph of Mount Frost, view from above")
 
 # The Ice Hotel
 
-Welcome to The Ice Hotel, the crown jewel of Mount Frost. Situated on the heights of this winter paradise, the hotel is a testament to the harmonious blend of luxury and the ethereal beauty of the Arctic landscape.
+A repository for the assignment Yrgopelag at Yrgo.
+
+In short, the assignment was to create a hotel booking site for a fictional hotel and store bookings in a SQL database.
+
+The hotel qualifies for a star rating (1-5) based on the following criteria:
+
+- The hotel website has a graphical presentation.
+- The hotel website can give discounts.
+- The hotel can offer at least one feature.
+- The hotel can use external data when producing successful booking responses.
+- The hotel has an admin page where for example room prices could be changed.
+
+### Mount Frost
+
+A frozen mountain in the sea (see image above).
+
+### The Ice Hotel - ⭐⭐⭐⭐⭐
+
+Welcome to The Ice Hotel, the crown jewel of Mount Frost: A hotel completely carved out of ice.
 
 Visit the site [here](https://php-fanclub.se/the-ice-hotel/)
 
@@ -23,10 +37,10 @@ Visit the site [here](https://php-fanclub.se/the-ice-hotel/)
 - npm i
 - npm run build
 
-### To make a successful booking without transfer code, for testing:
+### To make a successful booking without a transfer code, for testing:
 
-- In php/payment.php, uncomment line 39
-- In php/payment.php, comment out line 40
+- In php/payment.php, uncomment line 39 - `// if (1 === 1) { // used for testing instead of line below`
+- In php/payment.php, comment out line 40 - `if ($transferCodeStatus->transferCode === $transferCode) {`
 
 ### To test the admin page and login/logout from it:
 
