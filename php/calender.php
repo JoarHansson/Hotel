@@ -196,7 +196,6 @@ $extrasForAdvertising = array_slice($extras, 0, 5);
 <!-- calender container: -->
 <div id="calender" class="bg-cyan-50 p-4 lg:p-8 mx-auto flex flex-col lg:flex-row justify-between gap-10 lg:gap-20 max-w-md lg:max-w-5xl rounded-3xl shadow-cyan-50/25 shadow-xl">
 
-
   <div class="w-full">
     <h2 id="instruction-text" class="mb-8 text-center text-2xl font-extrabold leading-relaxed">Choose a start date</h2>
     <div class="mb-8 mx-auto grid gap-1 grid-cols-7 w-full">
@@ -207,6 +206,7 @@ $extrasForAdvertising = array_slice($extras, 0, 5);
       <div class="text-center text-base font-bold">Fri</div>
       <div class="text-center text-base font-bold">Sat</div>
       <div class="text-center text-base font-bold">Sun</div>
+
       <?php
       // Create month with 31 days and week starting on the 1st (Jan 2024)
       // The counter helps to assign the correct weekday to each date
@@ -225,6 +225,7 @@ $extrasForAdvertising = array_slice($extras, 0, 5);
             : ($isReserved  ? "bg-yellow-800 cursor-not-allowed" : "bg-yellow-600");
         }
         $disabledStatus = $isReserved ? "disabled" : "";
+
         $weekday;
         if (isset($week[$counter])) {
           $weekday = $week[$counter];
@@ -237,6 +238,7 @@ $extrasForAdvertising = array_slice($extras, 0, 5);
           <?= $i ?>
         </button>
       <?php endfor; ?>
+
     </div>
   </div>
 
@@ -278,4 +280,4 @@ $extrasForAdvertising = array_slice($extras, 0, 5);
   <input name="date-to" id="date-to" type="date" min="2024-01-01" max="2024-01-31">
 </form>
 
-<script src="/js/calender.js"></script>
+<script src="js/calender.js"></script>

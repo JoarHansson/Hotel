@@ -59,4 +59,4 @@ if (isset($_POST["date-from"], $_POST["date-to"])) {
   }
 }
 
-header("Location: /index.php");
+header("Location: " . $baseUrl . "index.php");

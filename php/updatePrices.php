@@ -19,4 +19,4 @@ if (isset($_POST["newPrice"], $_POST["roomId"])) {
   $statementUpdateRoomPrice->execute();
 }
 
-header("Location: /admin.php");
+header("Location: " . $baseUrl . "admin.php");

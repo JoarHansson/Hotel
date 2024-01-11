@@ -65,10 +65,6 @@ if (isset($_POST["guest-name"], $_POST["transfer-code"])) {
 
     $bookingId = $statementGetBookingId->fetch(PDO::FETCH_ASSOC);
 
-    print_r($bookingId);
-    echo "<pre>";
-    print_r($_SESSION["reservation"]["features"]);
-
     // save the extras info for the booking (insert into bookings_extras table):
     foreach ($_SESSION["reservation"]["features"] as $feature) {
       $statementSaveExtrasInfo = $db->prepare(
@@ -116,4 +112,4 @@ if (isset($_POST["guest-name"], $_POST["transfer-code"])) {
   }
 }
 
-header("Location: /index.php");
+header("Location: " . $baseUrl . "index.php");

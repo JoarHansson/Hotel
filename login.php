@@ -13,7 +13,7 @@ unset($_SESSION["loggedIn"]);
 
 <div class="container mx-auto pb-16 px-4 sm:px-6 lg:px-8">
 
-  <form id="form-login" action="/admin.php" method="post" class="flex flex-col text-base font-bold leading-loose bg-cyan-50 px-4 py-8 lg:p-8 mx-auto max-w-md rounded-3xl shadow-cyan-50/25 shadow-xl">
+  <form id="form-login" action="admin.php" method="post" class="flex flex-col text-base font-bold leading-loose bg-cyan-50 px-4 py-8 lg:p-8 mx-auto max-w-md rounded-3xl shadow-cyan-50/25 shadow-xl">
     <label for="admin-name">Admin name:</label>
     <input type="text" name="admin-name" class="mb-4 w-full border-0 ring-1 ring-inset ring-gray-600 focus:ring-2 focus:ring-inset focus:ring-cyan-950 placeholder:text-gray-300">
     <label for="admin-password">Admin password:</label>

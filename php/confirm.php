@@ -114,5 +114,5 @@ or if #button-cancel-booking is pressed -->
   <input name="pageState" type="text" value="home" hidden>
 </form>
 
-<script src="/js/confirm.js"></script>
-<script src="/js/cancelBooking.js"></script>
+<script src="js/confirm.js"></script>
+<script src="js/cancelBooking.js"></script>

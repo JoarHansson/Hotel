@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-require __DIR__ . "/php/autoload.php";
-require __DIR__ . "/php/header.php";
 require __DIR__ . "/vendor/autoload.php";
+require __DIR__ . "/php/autoload.php";
 
 use Dotenv\Dotenv;
 
@@ -21,8 +20,11 @@ if (isset($_POST["admin-name"], $_POST["admin-password"])) {
 }
 
 if (empty($_SESSION["loggedIn"])) {
-  header("Location: /login.php");
+  header("Location: " . $baseUrl . "login.php");
 }
+
+// header("Location: ...") above must be loaded before any html:
+require __DIR__ . "/php/header.php";
 
 /* code from calender.php to print calender on admin page: */
 $week = [
@@ -227,7 +229,7 @@ $accountBalance = json_decode($responseCheckAccountBalance->getBody()->getConten
         <div class="text-center font-bold  text-2xl bg-cyan-950 text-cyan-50 px-4 py-2">
           Account balance: $<span class="text-cyan-50" id="total-price"><?php echo $accountBalance->credit ?></span>
         </div>
-        <form id="form-logout" action="/login.php" method="post" class="text-base font-bold leading-loose bg-cyan-50 mx-auto lg:mr-0 lg:ml-auto max-w-md rounded-3xl shadow-cyan-50/25 shadow-xl">
+        <form id="form-logout" action="login.php" method="post" class="text-base font-bold leading-loose bg-cyan-50 mx-auto lg:mr-0 lg:ml-auto max-w-md rounded-3xl shadow-cyan-50/25 shadow-xl">
           <button type="submit" class="button-red">Logout</button>
         </form>
       </div>

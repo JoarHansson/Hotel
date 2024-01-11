@@ -15,3 +15,9 @@ if (empty($_SESSION["reservation"])) {
 }
 
 $db = new PDO("sqlite:" . __DIR__ . "/../database/hotel.db");
+
+// The following value for $baseUrl is used when testing the app in a local environment.
+$baseUrl = "/";
+
+// When the app is deployed the following value is used instead, or otherwise filepaths won't work correctly.
+// $baseUrl = "https://php-fanclub.se/the-ice-hotel/";
