@@ -260,7 +260,7 @@ $extrasForAdvertising = array_slice($extras, 0, 5);
         <span>- Reserved (check back soon)</span>
       </li>
       <li class="flex items-center gap-2">
-        <span class="w-4 h-4 <?= $roomChosen === 1 ? "bg-blue-950" : ($roomChosen === 2 ? "bg-purple-950" : "bg-yellow-950") ?>">"></span>
+        <span class="w-4 h-4 <?= $roomChosen === 1 ? "bg-blue-950" : ($roomChosen === 2 ? "bg-purple-950" : "bg-yellow-950") ?>"></span>
         <span>- Already booked</span>
       </li>
     </ul>

@@ -202,7 +202,7 @@ $accountBalance = json_decode($responseCheckAccountBalance->getBody()->getConten
           <span>- Reserved</span>
         </li>
         <li class="flex items-center gap-2">
-          <span class="w-4 h-4 <?= $roomChosen === 1 ? "bg-blue-950" : ($roomChosen === 2 ? "bg-purple-950" : "bg-yellow-950") ?>">"></span>
+          <span class="w-4 h-4 <?= $roomChosen === 1 ? "bg-blue-950" : ($roomChosen === 2 ? "bg-purple-950" : "bg-yellow-950") ?>"></span>
           <span>- Booked</span>
         </li>
       </ul>
