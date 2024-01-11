@@ -196,7 +196,7 @@ $extrasForAdvertising = array_slice($extras, 0, 5);
 <!-- calender container: -->
 <div id="calender" class="bg-cyan-50 p-4 lg:p-8 mx-auto flex flex-col lg:flex-row justify-between gap-10 lg:gap-20 max-w-md lg:max-w-5xl rounded-3xl shadow-cyan-50/25 shadow-xl">
 
-  <div class="w-full">
+  <div class="w-full max-w-xl">
     <h2 id="instruction-text" class="mb-8 text-center text-2xl font-extrabold leading-relaxed">Choose a start date</h2>
     <div class="mb-8 mx-auto grid gap-1 grid-cols-7 w-full">
       <div class="text-center text-base font-bold">Mon</div>
