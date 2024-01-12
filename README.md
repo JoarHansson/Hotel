@@ -55,13 +55,21 @@ Star rating  - ⭐⭐⭐⭐⭐
 
 # Code review
 
-1. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-2. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-3. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-4. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-5. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-6. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-7. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-8. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-9. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
-10. example.js:10-15 - Remember to think about X and this could be refactored using the amazing Y function.
+prepareData.php: 95-97 - “Might change later…”  Might be good to have set prices at launch of the site.   
+index.php: 9-17 - Could’ve been a function to just call inside the index.php to make the index file look more clean. 
+
+index.php: 25-39 - Could’ve been a function to just call inside the index.php to make the index file look more clean. 
+
+index.php: 41-46 - If commented out code is used in local tests, make a comment above to state why the code is still in the file. Otherwise remove. 
+
+confirm.php: 12-15 - Could’ve been a function inside functions.php or a file where all db connections syntax is set, that could’ve been called inside the confirm.php for a better looking code. 
+
+error.php: 10 - Where is the $_SESSION[‘message’] set, a comment to where I can find the message text in the code would be needed. 
+
+home.php: 7 - $_SESSION[‘roomType’] don’t know where this is set. A comment to where I can find the form where it’s set would have been good. 
+
+admin.php: 29—97 -  If you would have used functions to structure the code inside calendar.php you could have called the functions instead of copy+paste the code from one file to another. 
+
+General tip - There is a lot of $_SESSION variables in the code, to know where they come from I would recommend to either save them inside a function to call or to leave a comment on where the form where they are found is in the code. 
+
+calendar.php: 17-21 - Instead of using the hardcoded number three as the deluxe room in the “else” statement. Save the number 3 inside the $deluxe variable to make the code more clean. 
